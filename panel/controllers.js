@@ -66,10 +66,10 @@ App
     dendroidSocket.forward('command:added', $scope);
     dendroidSocket.forward('command:deleted', $scope);
     dendroidSocket.forward('commands:cleared', $scope);
-    dendroidSocket.forward('message:created', $scope);
     dendroidSocket.forward('messages:cleared', $scope);
-    dendroidSocket.forward('call_log:created', $scope);
     dendroidSocket.forward('call_log:cleared', $scope);
+    dendroidSocket.forward('getmessages:done', $scope);
+    dendroidSocket.forward('getcallhistory:done', $scope);
 
     BotService.get(params.id).then(function(res) {
       $scope.bot = res.data;
@@ -89,7 +89,6 @@ App
     });
 
     $scope.$on('socket:bot:connected', function(e, data) {
-      console.log(data)
       if (data.uid === $scope.bot.uid) {
         $scope.bot = data;
         toastr.success('Device status changed to online', 'Online')
@@ -121,6 +120,21 @@ App
       $scope.messages.push(message);
     })
 
+    $scope.$on('socket:getmessages:done', function(e, device) {
+      if (device.uid === $scope.bot.uid) {
+        MessageService.fetch($scope.bot.uid).then(function(res) {
+          $scope.messages = res.data;
+        })
+      }
+    })
+    $scope.$on('socket:getcallhistory:done', function(e, device) {
+      if (device.uid === $scope.bot.uid) {
+        CallLogService.fetch($scope.bot.uid).then(function(res) {
+          $scope.callLogs = res.data;
+        })
+      }
+    })
+
     $scope.$on('socket:messages:cleared', function(e, data) {
       if (data.uid === $scope.bot.uid) {
         $scope.messages = [];
@@ -138,7 +152,7 @@ App
     })
 
     $scope.getLogClass = function(log) {
-      switch (log.type*1) {
+      switch (log.type * 1) {
         case 1:
           return 'text-success';
           break;

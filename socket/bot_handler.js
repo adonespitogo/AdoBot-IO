@@ -25,8 +25,6 @@ module.exports = function BotHandler(io, socket, device) {
 
   this.attachHandlers = function() {
     socket.on('disconnect', this.deviceDisconnected)
-    socket.on('message:push', this.messagePushed)
-    socket.on('call_log:push', this.callLogPushed)
   }
 
   this.registerDevice = function() {
@@ -107,22 +105,6 @@ module.exports = function BotHandler(io, socket, device) {
         })
         .catch(catchError)
       })
-  }
-
-  this.messagePushed = function(message) {
-    Message.create(message)
-      .then(function(dbMessage) {
-        notifyAdmin('message:created', dbMessage)
-      })
-      .catch(catchError)
-  }
-
-  this.callLogPushed = function(cl) {
-    CallLog.create(cl)
-      .then(function(dbCallLog) {
-        notifyAdmin('call_log:created', dbCallLog)
-      })
-      .catch(catchError)
   }
 
 }

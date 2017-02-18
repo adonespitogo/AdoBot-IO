@@ -15,7 +15,6 @@ module.exports = function(io) {
 
       CallLog.create(attrs)
       .then (function (dbCallLog) {
-        io.to('/admin').emit('call_log:added', dbCallLog)
         res.json(dbCallLog)
       })
       .catch(function (err) {
