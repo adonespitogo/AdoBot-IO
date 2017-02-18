@@ -4,5 +4,6 @@ App = angular.module('dendroid', [
   'ui.bootstrap',
   'ngAnimate',
   'toastr',
-  'angular-duration-format'
+  'angular-duration-format',
+  'angularMoment'
 ]);
