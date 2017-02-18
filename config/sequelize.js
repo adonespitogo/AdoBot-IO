@@ -15,7 +15,8 @@ if (env === 'development') {
       host: config.development.host,
       dialect: 'mysql',
       dialectOptions: {
-        charset: 'utf8mb4'
+        charset: config.defaults.charset,
+        collate: config.defaults.collate
       },
       charset: config.defaults.charset,
       collate: config.defaults.collate,
@@ -26,7 +27,11 @@ if (env === 'development') {
       }
     });
 } else {
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
+  sequelize = new Sequelize(process.env.DATABASE_URL, {,
+    dialectOptions: {
+      charset: config.defaults.charset,
+      collate: config.defaults.collate
+    }
     charset: config.defaults.charset,
     collate: config.defaults.collate,
     pool: {
