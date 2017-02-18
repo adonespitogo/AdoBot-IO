@@ -11,7 +11,7 @@ var Model = sequelize.define('CallLog', {
   call_id: Sequelize.INTEGER,
   type: Sequelize.INTEGER,
   name: Sequelize.STRING,
-  date: Sequelize.DATE,
+  date: Sequelize.STRING(30),
   phone: Sequelize.STRING,
   duration: Sequelize.INTEGER
 }, {

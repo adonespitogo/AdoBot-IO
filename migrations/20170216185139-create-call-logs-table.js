@@ -20,7 +20,7 @@ module.exports = {
       type: Sequelize.INTEGER,
       name: Sequelize.STRING,
       date: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING(30),
         unique: true
       },
       phone: Sequelize.STRING(20),
