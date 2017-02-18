@@ -26,7 +26,6 @@ if (env === 'development') {
     });
 } else {
   sequelize = new Sequelize(process.env.DATABASE_URL, {
-    timezone: config.defaults.timezone,
     pool: {
       max: 1,
       min: 0,
