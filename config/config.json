@@ -1,8 +1,8 @@
 {
   "defaults": {
-    "timezone": "+08:00"
-  }
-  ,
+    "charset": "utf8mb4",
+    "collate": "utf8mb4_unicode_ci"
+  },
   "development": {
     "username": "root",
     "password": null,

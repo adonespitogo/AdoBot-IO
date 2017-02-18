@@ -26,6 +26,7 @@
     "body-parser": "^1.16.1",
     "express": "^4.14.1",
     "mysql": "^2.13.0",
+    "q": "^1.4.1",
     "require-dir": "^0.3.1",
     "sequelize": "^3.30.2",
     "sequelize-cli": "^2.5.1",
