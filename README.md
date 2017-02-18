@@ -22,3 +22,5 @@ $ node index.js
 
 Browse to [http://127.0.0.1:3000](http://127.0.0.1:3000)
 
+Also see: [AdoBot](https://github.com/adonespitogo/AdoBot) - the android client
+
