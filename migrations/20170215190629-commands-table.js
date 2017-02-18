@@ -15,24 +15,10 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
-      uid: {
-        type: Sequelize.STRING,
-        length: 100
-      },
-      command: {
-        type: Sequelize.STRING,
-        length: 100
-      },
-      arg1: {
-        type: Sequelize.STRING,
-        length: 100
-      },
-      arg2: {
-        type: Sequelize.STRING,
-        length: 160
-      }
-    }, {
-      timestamps: false
+      uid: Sequelize.STRING(20),
+      command: Sequelize.STRING(20),
+      arg1: Sequelize.STRING(50),
+      arg2: Sequelize.STRING(50)
     });
   },
 

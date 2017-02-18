@@ -9,15 +9,12 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
-      uid: {
-        type: Sequelize.STRING,
-        length: 100
-      },
+      uid: Sequelize.STRING(20),
       message: Sequelize.TEXT,
       date: Sequelize.DATE,
       type: Sequelize.INTEGER,
-      name: Sequelize.STRING,
-      phone: Sequelize.STRING,
+      name: Sequelize.STRING(50),
+      phone: Sequelize.STRING(20),
       thread_id: Sequelize.INTEGER,
       message_id: {
         type: Sequelize.INTEGER,

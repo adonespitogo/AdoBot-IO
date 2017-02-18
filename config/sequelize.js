@@ -14,10 +14,10 @@ if (env === 'development') {
     {
       host: config.development.host,
       dialect: 'mysql',
+      timezone: config.defaults.timezone,
       dialectOptions: {
         charset: 'utf8mb4'
       },
-
       pool: {
         max: 5,
         min: 0,
@@ -26,6 +26,7 @@ if (env === 'development') {
     });
 } else {
   sequelize = new Sequelize(process.env.DATABASE_URL, {
+    timezone: config.defaults.timezone,
     pool: {
       max: 1,
       min: 0,

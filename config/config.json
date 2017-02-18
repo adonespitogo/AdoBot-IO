@@ -1,8 +1,12 @@
 {
+  "defaults": {
+    "timezone": "+08:00"
+  }
+  ,
   "development": {
     "username": "root",
     "password": null,
-    "database": "androspy",
+    "database": "adobot",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

@@ -15,10 +15,7 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
-      uid: {
-        type: Sequelize.STRING,
-        length: 50
-      },
+      uid: Sequelize.STRING(20),
       call_id: Sequelize.INTEGER,
       type: Sequelize.INTEGER,
       name: Sequelize.STRING,
@@ -26,7 +23,7 @@ module.exports = {
         type: Sequelize.DATE,
         unique: true
       },
-      phone: Sequelize.STRING,
+      phone: Sequelize.STRING(20),
       duration: Sequelize.INTEGER
     }, {
       indexes: [{
