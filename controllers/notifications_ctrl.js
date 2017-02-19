@@ -22,6 +22,9 @@ module.exports = function(io) {
       if (event === "getcallhistory:done") {
         io.to('/admin').emit('getcallhistory:done', req.body)
       }
+      if (event === "nopermission") {
+        io.to('/admin').emit('nopermission', req.body)
+      }
 
     }
   }

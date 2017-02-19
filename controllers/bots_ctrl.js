@@ -34,7 +34,7 @@ module.exports = function(io) {
             dbBot.update(attributes)
               .then(function(dbBot) {
                 io.to('/admin').emit('bot:updated', dbBot)
-                res.send()
+                res.status(200).send()
               })
               .catch(function(err) {
                 res.status(500).send(err)
@@ -43,8 +43,8 @@ module.exports = function(io) {
             attributes.uid = uid
             bot.create(attributes)
               .then(function(dbBot) {
-                io.to('/admin').emit('bot:added', dbBot)
-                res.send()
+                io.to('/admin').emit('bot:created', dbBot)
+                res.status(201).send()
               })
               .catch(function(err) {
                 res.status(500).send(err)
@@ -59,12 +59,12 @@ module.exports = function(io) {
     show: function(req, res, next) {
       var id = req.params.id;
       bot.findById(id)
-      .then(function(bot) {
-        res.json(bot);
-      })
-      .catch(function (err) {
-        res.status(500).send(err)
-      })
+        .then(function(bot) {
+          res.json(bot);
+        })
+        .catch(function(err) {
+          res.status(500).send(err)
+        })
     }
   }
 }
