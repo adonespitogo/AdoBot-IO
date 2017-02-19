@@ -30,7 +30,6 @@ module.exports = function BotHandler(io, socket, device) {
   this.registerDevice = function() {
 
     console.log('Client registered: ' + device.uid)
-    socket.join('/' + device.uid);
 
     Bot.findOne({
         where: {
@@ -94,7 +93,7 @@ module.exports = function BotHandler(io, socket, device) {
         }
       })
       .then(function(dbCommands) {
-        io.to('/' + device.uid).emit('commands', dbCommands);
+        socket.emit('commands', dbCommands);
         Command.destroy({
           where: {
             uid: device.uid

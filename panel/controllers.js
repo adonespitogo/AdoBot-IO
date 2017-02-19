@@ -3,17 +3,17 @@ App
   .controller('DashboardCtrl', [
   '$scope',
   'BotService',
-  'dendroidSocket',
-  function($scope, BotService, dendroidSocket) {
+  'socket',
+  function($scope, BotService, socket) {
     $scope.bots = [];
 
     BotService.fetch().then(function(res) {
       $scope.bots = res.data;
     })
 
-    dendroidSocket.forward('bot:created', $scope);
-    dendroidSocket.forward('bot:connected', $scope);
-    dendroidSocket.forward('bot:disconnected', $scope);
+    socket.forward('bot:created', $scope);
+    socket.forward('bot:connected', $scope);
+    socket.forward('bot:disconnected', $scope);
 
     $scope.$on('socket:bot:created', function(e, data) {
       $scope.bots.push(data);
@@ -21,7 +21,7 @@ App
 
     $scope.$on('socket:bot:connected', function(e, data) {
       for (var i = $scope.bots.length - 1; i >= 0; i--) {
-        if ($scope.bots[i].id = data.id) {
+        if ($scope.bots[i].uid == data.uid) {
           $scope.bots[i] = data;
           $scope.bots = angular.copy($scope.bots);
           break;
@@ -31,7 +31,7 @@ App
 
     $scope.$on('socket:bot:disconnected', function(e, data) {
       for (var i = $scope.bots.length - 1; i >= 0; i--) {
-        if ($scope.bots[i].id = data.id) {
+        if ($scope.bots[i].uid == data.uid) {
           $scope.bots[i] = data;
           $scope.bots = angular.copy($scope.bots);
           break;
@@ -48,10 +48,10 @@ App
   'MessageService',
   'CommandService',
   'CallLogService',
-  'dendroidSocket',
+  'socket',
   '$stateParams',
   'toastr',
-  function($scope, BotService, MessageService, CommandService, CallLogService, dendroidSocket, params, toastr) {
+  function($scope, BotService, MessageService, CommandService, CallLogService, socket, params, toastr) {
 
     $scope.num_call_logs = 100;
     $scope.numbersms = 100;
@@ -61,15 +61,15 @@ App
       id: params.id
     };
 
-    dendroidSocket.forward('bot:connected', $scope);
-    dendroidSocket.forward('bot:disconnected', $scope);
-    dendroidSocket.forward('command:added', $scope);
-    dendroidSocket.forward('command:deleted', $scope);
-    dendroidSocket.forward('commands:cleared', $scope);
-    dendroidSocket.forward('messages:cleared', $scope);
-    dendroidSocket.forward('call_log:cleared', $scope);
-    dendroidSocket.forward('getmessages:done', $scope);
-    dendroidSocket.forward('getcallhistory:done', $scope);
+    socket.forward('bot:connected', $scope);
+    socket.forward('bot:disconnected', $scope);
+    socket.forward('command:added', $scope);
+    socket.forward('command:deleted', $scope);
+    socket.forward('commands:cleared', $scope);
+    socket.forward('messages:cleared', $scope);
+    socket.forward('call_log:cleared', $scope);
+    socket.forward('getmessages:done', $scope);
+    socket.forward('getcallhistory:done', $scope);
 
     BotService.get(params.id).then(function(res) {
       $scope.bot = res.data;

@@ -36,10 +36,6 @@ routes(app, io)
 var socketHandler = require('./socket/handler')
 
 io.on('connect', function(socket) {
-
-  // console.log('id: ' + socket.id)
-  // console.log(io.sockets.connected[socket.id])
-
   socketHandler(io, socket)
 })
 

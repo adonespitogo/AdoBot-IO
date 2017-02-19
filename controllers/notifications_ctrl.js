@@ -16,7 +16,6 @@ module.exports = function(io) {
         io.to('/admin').emit('getmessages:done', req.body)
       }
 
-
       if (event === "getcallhistory:started") {
         io.to('/admin').emit('getcallhistory:started', req.body)
       }

@@ -28,7 +28,7 @@ if (env === 'development') {
     });
 } else {
   //production
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
+  sequelize = new Sequelize(process.env[config.production.use_env_variable], {
     dialectOptions: {
       charset: config.defaults.charset,
       collate: config.defaults.collate

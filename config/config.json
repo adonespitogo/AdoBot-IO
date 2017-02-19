@@ -8,7 +8,11 @@
     "password": null,
     "database": "adobot",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "admin" : {
+      "username": "admin",
+      "password": "admin"
+    }
   },
   "production": {
     "use_env_variable": "DATABASE_URL",
@@ -17,6 +21,14 @@
       "min": 1,
       "idle": 10000,
       "maxIdleTime": 120000
+    },
+    "admin": {
+      "username": {
+        "use_env_variable": "ADMIN_USERNAME"
+      } ,
+      "password": {
+        "use_env_variable": "ADMIN_PASSWORD"
+      }
     }
   }
 }

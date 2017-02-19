@@ -53,7 +53,7 @@ App.service('BotService', ['$http', function($http) {
   }
 ])
 
-.factory('dendroidSocket', [
+.factory('socket', [
   'socketFactory',
   '$timeout',
   'toastr',

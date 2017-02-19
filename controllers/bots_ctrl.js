@@ -12,23 +12,17 @@ module.exports = function(io) {
         })
     },
     updateStatus: function(req, res, next) {
-      var uid = req.query.UID
+      var uid = req.params.uid
       var attributes = {
         status: true,
         updated: new Date(),
-        provider: req.query.Provider,
-        device: req.query.Device,
-        version: req.query.Version,
-        phone: req.query.Phone_Number,
-        sdk: req.query.Sdk,
-        random: req.query.Random,
-        lat: 0,
-        longi: 0
-      }
-      if (req.query.Coordinates) {
-        var coords = req.query.Coordinates.split(',')
-        attributes.lat = coords[0] === 'null' ? 0 : coords[0]
-        attributes.longi = coords[1] === 'null' ? 0 : coords[1]
+        provider: req.body.provider,
+        device: req.body.device,
+        version: req.body.version,
+        phone: req.body.phone,
+        sdk: req.body.sdk,
+        lat: req.body.lat,
+        longi: req.body.longi
       }
       bot.findOne({
           where: {
