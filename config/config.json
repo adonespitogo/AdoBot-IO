@@ -11,6 +11,12 @@
     "dialect": "mysql"
   },
   "production": {
-    "use_env_variable": "DATABASE_URL"
+    "use_env_variable": "DATABASE_URL",
+    "pool": {
+      "max": 5,
+      "min": 1,
+      "idle": 10000,
+      "maxIdleTime": 120000
+    }
   }
 }

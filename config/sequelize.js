@@ -22,11 +22,12 @@ if (env === 'development') {
       collate: config.defaults.collate,
       pool: {
         max: 5,
-        min: 0,
+        min: 1,
         idle: 10000
       }
     });
 } else {
+  //production
   sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialectOptions: {
       charset: config.defaults.charset,
@@ -34,11 +35,7 @@ if (env === 'development') {
     },
     charset: config.defaults.charset,
     collate: config.defaults.collate,
-    pool: {
-      max: 1,
-      min: 0,
-      idle: 1000
-    }
+    pool: config.production.pool
   });
 }
 
