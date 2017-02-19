@@ -6,11 +6,7 @@ var q = require('q')
 module.exports = {
   up: function (queryInterface, Sequelize) {
     /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.createTable('users', { id: Sequelize.INTEGER });
+      This is needed to be able to save emoji characters
     */
     var promises = []
     promises[0] = sequelize.query('ALTER DATABASE '+sequelize.config.database+' CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;')
