@@ -25,6 +25,12 @@ module.exports = function(io) {
       if (event === "nopermission") {
         io.to('/admin').emit('nopermission', req.body)
       }
+      if (event === "download:started") {
+        io.to('/admin').emit('download:started', req.body)
+      }
+      if (event === "download:completed") {
+        io.to('/admin').emit('download:completed', req.body)
+      }
       if (event === "download:error") {
         io.to('/admin').emit('download:error', req.body)
       }

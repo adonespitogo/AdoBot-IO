@@ -106,8 +106,16 @@ App.service('BotService', ['$http', function($http) {
       toastr.error('App is denied a permission: ' + data.permission, data.device)
     })
 
-    socket.on('download:error', function(data) {
+    socket.on('download:started', function(data) {
+      toastr.info('Download started', data.device)
+    })
+
+    socket.on('download:completed', function(data) {
       console.log(data)
+      toastr.success('Download completed', data.device)
+    })
+
+    socket.on('download:error', function(data) {
       toastr.error(data.error, data.device)
     })
 
