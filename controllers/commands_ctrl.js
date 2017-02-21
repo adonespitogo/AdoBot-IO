@@ -27,8 +27,12 @@ module.exports = function(io) {
         })
         .then(function(dbBot) {
           if (dbBot) {
-            io.sockets.connected[dbBot.socket_id].emit('commands', [req.body])
-            res.status(201).send()
+            if (io.sockets.connected[dbBot.socket_id]) {
+              io.sockets.connected[dbBot.socket_id].emit('commands', [req.body])
+              res.status(201).send()
+            } else {
+              res.status(422).send()
+            }
           } else {
 
             Command.create(req.body)

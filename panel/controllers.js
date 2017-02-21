@@ -171,7 +171,7 @@ App
           arg2: arg2
         })
         .catch(function(err) {
-          console.log(err)
+          toastr.error('Unable to send command to the device', 'Failed')
         })
     }
 
