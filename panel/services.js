@@ -66,19 +66,14 @@ App.service('BotService', ['$http', function($http) {
       console.log(msg)
     })
 
-    function reconnect() {
-      toastr.warning('Disconnected. Reconnecting in 5 seconds...', 'Disconnected');
-      $timeout(function() {
-        $http.get('/').then(function() {
-          socket.connect();
-        }).catch(function() {
-          toastr.clear();
-          reconnect();
-        });
-      }, reconnectTime * 1000);
-    }
+    socket.on('disconnect', function() {
+      toastr.warning('Panel is offline', 'Disconnected');
+    })
 
-    socket.on('disconnect', reconnect)
+    socket.on('connect', function() {
+      socket.emit('admin')
+    })
+
     socket.on('reconnect', function() {
 
       socket.emit('admin')
