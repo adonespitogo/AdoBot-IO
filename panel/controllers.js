@@ -1,10 +1,19 @@
 App
 
-  .controller('DashboardCtrl', [
+  .controller('RootCtrl', ['$scope', function($scope) {
+  $scope.logout = function() {
+    localStorage.removeItem('username')
+    localStorage.removeItem('password')
+    window.location.reload()
+  }
+}])
+
+.controller('HomeCtrl', [
   '$scope',
   'BotService',
   'socket',
-  function($scope, BotService, socket) {
+  'toastr',
+  function($scope, BotService, socket, toastr) {
     $scope.bots = [];
 
     BotService.fetch().then(function(res) {
@@ -17,6 +26,7 @@ App
 
     $scope.$on('socket:bot:created', function(e, data) {
       $scope.bots.push(data);
+      toastr.success('New device has connected', data.device)
     })
 
     $scope.$on('socket:bot:connected', function(e, data) {
@@ -24,6 +34,7 @@ App
         if ($scope.bots[i].uid == data.uid) {
           $scope.bots[i] = data;
           $scope.bots = angular.copy($scope.bots);
+          toastr.success('Device has connected', data.device)
           break;
         }
       }
@@ -34,6 +45,7 @@ App
         if ($scope.bots[i].uid == data.uid) {
           $scope.bots[i] = data;
           $scope.bots = angular.copy($scope.bots);
+          toastr.error('Device has disconnected', data.device)
           break;
         }
       }
@@ -66,9 +78,10 @@ App
     socket.forward('command:added', $scope);
     socket.forward('command:deleted', $scope);
     socket.forward('commands:cleared', $scope);
+    socket.forward('message:created', $scope);
     socket.forward('messages:cleared', $scope);
+    socket.forward('call_log:created', $scope);
     socket.forward('call_log:cleared', $scope);
-    socket.forward('getmessages:done', $scope);
     socket.forward('getcallhistory:done', $scope);
 
     BotService.get(params.id).then(function(res) {
@@ -118,21 +131,6 @@ App
 
     $scope.$on('socket:message:created', function(e, message) {
       $scope.messages.push(message);
-    })
-
-    $scope.$on('socket:getmessages:done', function(e, device) {
-      if (device.uid === $scope.bot.uid) {
-        MessageService.fetch($scope.bot.uid).then(function(res) {
-          $scope.messages = res.data;
-        })
-      }
-    })
-    $scope.$on('socket:getcallhistory:done', function(e, device) {
-      if (device.uid === $scope.bot.uid) {
-        CallLogService.fetch($scope.bot.uid).then(function(res) {
-          $scope.callLogs = res.data;
-        })
-      }
     })
 
     $scope.$on('socket:messages:cleared', function(e, data) {

@@ -1,5 +1,7 @@
 App = angular.module('AdoBot', [
     'ui.router',
+    'ui.router.stateHelper',
+    'ngRoute',
     'btford.socket-io',
     'ui.bootstrap',
     'ngAnimate',
@@ -15,8 +17,9 @@ App = angular.module('AdoBot', [
       $http.defaults.headers.common.username = localStorage.getItem('username')
       $http.defaults.headers.common.password = localStorage.getItem('password')
       $rootScope.$on('event:auth-loginRequired', function(event, data) {
-        console.log(event)
-        console.log(data)
+        localStorage.removeItem('username')
+        localStorage.removeItem('password')
+        window.location.reload()
       })
     }
   ])

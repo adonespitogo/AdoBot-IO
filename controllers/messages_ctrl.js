@@ -23,7 +23,7 @@ module.exports = function(io) {
         })
         .then(function(dbMessage) {
           res.status(201).send();
-          // io.to('/admin').emit('message:created', dbMessage)
+          io.to('/admin').emit('message:created', dbMessage)
         })
         .catch(function(err) {
           res.status(500).send(err)

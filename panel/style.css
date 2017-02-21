@@ -1,7 +1,9 @@
 body {
   padding-top: 70px;
 }
-
+a {
+  cursor: pointer;
+}
 .tab-pane {
   padding-top: 15px;
 }
