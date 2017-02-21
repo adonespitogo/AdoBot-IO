@@ -12,7 +12,7 @@ var Model = sequelize.define('Message', {
     length: 100
   },
   message: Sequelize.TEXT,
-  date: Sequelize.DATE,
+  date: Sequelize.Sequelize.STRING(50),
   type: Sequelize.INTEGER,
   name: Sequelize.STRING(20),
   phone: Sequelize.STRING(20),

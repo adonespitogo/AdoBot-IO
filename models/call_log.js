@@ -12,7 +12,7 @@ var Model = sequelize.define('CallLog', {
   type: Sequelize.INTEGER,
   name: Sequelize.STRING(20),
   date: {
-    type: Sequelize.DATE,
+    type: Sequelize.STRING(50),
     unique: true
   },
   phone: Sequelize.STRING(20),
