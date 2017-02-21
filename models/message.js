@@ -12,14 +12,12 @@ var Model = sequelize.define('Message', {
     length: 100
   },
   message: Sequelize.TEXT,
-  date: Sequelize.STRING(30),
+  date: Sequelize.DATE,
   type: Sequelize.INTEGER,
-  name: Sequelize.STRING,
-  phone: Sequelize.STRING,
+  name: Sequelize.STRING(20),
+  phone: Sequelize.STRING(20),
   thread_id: Sequelize.INTEGER,
-  message_id: {
-    type: Sequelize.INTEGER
-  }
+  message_id: Sequelize.INTEGER
 
 }, {
   tableName: 'messages',

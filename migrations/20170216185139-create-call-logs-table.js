@@ -18,9 +18,9 @@ module.exports = {
       uid: Sequelize.STRING(20),
       call_id: Sequelize.INTEGER,
       type: Sequelize.INTEGER,
-      name: Sequelize.STRING,
+      name: Sequelize.STRING(20),
       date: {
-        type: Sequelize.STRING(30),
+        type: Sequelize.DATE,
         unique: true
       },
       phone: Sequelize.STRING(20),

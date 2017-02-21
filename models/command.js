@@ -8,20 +8,16 @@ var Model = sequelize.define('Command', {
     autoIncrement: true
   },
   uid: {
-    type: Sequelize.STRING,
-    length: 100
+    type: Sequelize.STRING(20)
   },
   command: {
-    type: Sequelize.STRING,
-    length: 100
+    type: Sequelize.STRING(100)
   },
   arg1: {
-    type: Sequelize.STRING,
-    length: 100
+    type: Sequelize.STRING
   },
   arg2: {
-    type: Sequelize.STRING,
-    length: 160
+    type: Sequelize.STRING
   }
 }, {
   tableName: 'commands',

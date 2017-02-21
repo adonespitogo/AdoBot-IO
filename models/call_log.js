@@ -7,12 +7,15 @@ var Model = sequelize.define('CallLog', {
     primaryKey: true,
     autoIncrement: true
   },
-  uid: Sequelize.STRING,
+  uid: Sequelize.STRING(20),
   call_id: Sequelize.INTEGER,
   type: Sequelize.INTEGER,
-  name: Sequelize.STRING,
-  date: Sequelize.STRING(30),
-  phone: Sequelize.STRING,
+  name: Sequelize.STRING(20),
+  date: {
+    type: Sequelize.DATE,
+    unique: true
+  },
+  phone: Sequelize.STRING(20),
   duration: Sequelize.INTEGER
 }, {
   tableName: 'call_logs',

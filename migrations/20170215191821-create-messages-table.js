@@ -11,9 +11,9 @@ module.exports = {
       },
       uid: Sequelize.STRING(20),
       message: Sequelize.TEXT,
-      date: Sequelize.STRING(30),
+      date: Sequelize.DATE,
       type: Sequelize.INTEGER,
-      name: Sequelize.STRING(50),
+      name: Sequelize.STRING(20),
       phone: Sequelize.STRING(20),
       thread_id: Sequelize.INTEGER,
       message_id: {

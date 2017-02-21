@@ -16,9 +16,9 @@ module.exports = {
         autoIncrement: true
       },
       uid: Sequelize.STRING(20),
-      command: Sequelize.STRING(20),
-      arg1: Sequelize.STRING(50),
-      arg2: Sequelize.STRING(50)
+      command: Sequelize.STRING(50),
+      arg1: Sequelize.STRING,
+      arg2: Sequelize.STRING
     });
   },
 
