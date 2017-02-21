@@ -41,6 +41,7 @@ module.exports = function BotHandler(io, socket, device) {
         var attrs = device
         attrs.status = true
         attrs.socket_id = socket.id
+        attrs.updated = new Date()
 
         if (dbBot) {
           dbBot.update(attrs)
