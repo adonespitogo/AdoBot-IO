@@ -19,7 +19,7 @@
         <a ui-sref="bot({id: bot.id})">{{bot.uid}}</a>
       </td>
       <td class="{{bot.status? 'text-success' : 'text-danger'}}">{{bot.status ? 'ONLINE' : 'OFFLINE'}}</td>
-      <td>{{bot.updated | date: 'EEE MMM dd, yyyy hh:mm a'}}</td>
+      <td>{{bot.updated | amCalendar:referenceTime:formats}}</td>
       <td>{{bot.provider}}</td>
       <td>{{bot.phone}}</td>
       <td>({{bot.lat}}, {{bot.longi}})</td>
