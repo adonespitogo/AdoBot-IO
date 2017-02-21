@@ -79,7 +79,7 @@ App.service('BotService', ['$http', function($http) {
     }
 
     socket.on('disconnect', reconnect)
-    socket.on('connect', function() {
+    socket.on('reconnect', function() {
 
       socket.emit('admin')
       toastr.clear();
