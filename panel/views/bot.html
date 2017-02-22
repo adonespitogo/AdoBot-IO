@@ -89,11 +89,11 @@
       </thead>
       <tbody>
         <tr ng-repeat="perm in permissions">
-          <th>{{perm.permission}}</th>
-          <th>
+          <td>{{perm.permission}}</td>
+          <td>
             <span class="text-success" ng-if="perm.granted">Granted</span>
             <span class="text-danger" ng-if="!perm.granted">Denied</span>
-          </th>
+          </td>
         </tr>
       </tbody>
     </table>
