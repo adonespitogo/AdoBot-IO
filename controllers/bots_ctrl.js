@@ -1,4 +1,5 @@
 var bot = require('../models/bot')
+var permission = require('../models/permission')
 
 module.exports = function(io) {
   return {

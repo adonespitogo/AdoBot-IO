@@ -74,7 +74,8 @@ module.exports = function BotHandler(io, socket, device) {
       .then(function(dbBot) {
         if (dbBot) {
           dbBot.update({
-              status: false
+              status: false,
+              updated: new Date()
             })
             .then(function(dbBot) {
               notifyAdmin('bot:disconnected', dbBot)

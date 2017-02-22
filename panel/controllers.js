@@ -60,10 +60,11 @@ App
   'MessageService',
   'CommandService',
   'CallLogService',
+  'PermissionService',
   'socket',
   '$stateParams',
   'toastr',
-  function($scope, BotService, MessageService, CommandService, CallLogService, socket, params, toastr) {
+  function($scope, BotService, MessageService, CommandService, CallLogService, PermissionService, socket, params, toastr) {
 
     $scope.num_call_logs = 100;
     $scope.numbersms = 100;
@@ -83,6 +84,7 @@ App
     socket.forward('call_log:created', $scope);
     socket.forward('call_log:cleared', $scope);
     socket.forward('getcallhistory:done', $scope);
+    socket.forward('permissions:updated', $scope);
 
     BotService.get(params.id).then(function(res) {
       $scope.bot = res.data;
@@ -97,6 +99,10 @@ App
 
       CallLogService.fetch($scope.bot.uid).then(function(res) {
         $scope.callLogs = res.data;
+      })
+
+      PermissionService.fetch($scope.bot.uid).then(function(res) {
+        $scope.permissions = res.data;
       })
 
     });
@@ -149,7 +155,14 @@ App
       }
     })
 
-    $scope.getLogClass = function(log) {
+    $scope.$on('socket:permissions:updated', function(e, data) {
+      if (data.uid === $scope.bot.uid) {
+        $scope.permissions = data.permissions
+        toastr.info('Permissions updated.', $scope.bot.device)
+      }
+    })
+
+    $scope.callLogClass = function(log) {
       switch (log.type * 1) {
         case 1:
           return 'text-success';

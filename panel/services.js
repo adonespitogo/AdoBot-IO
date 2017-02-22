@@ -53,6 +53,15 @@ App.service('BotService', ['$http', function($http) {
   }
 ])
 
+.service('PermissionService', [
+  '$http',
+  function($http) {
+    this.fetch = function(uid) {
+      return $http.get('/permissions/' + uid);
+    }
+  }
+])
+
 .factory('socket', [
   'socketFactory',
   '$timeout',

@@ -17,36 +17,29 @@ module.exports = {
         autoIncrement: true
       },
       uid: {
-        type: Sequelize.STRING,
-        length: 100
+        type: Sequelize.STRING(20)
       },
       status: Sequelize.BOOLEAN,
       updated: Sequelize.DATE,
       provider: {
-        type: Sequelize.STRING,
-        length: 100
+        type: Sequelize.STRING(100)
       },
       lat: Sequelize.DECIMAL,
       longi: Sequelize.DECIMAL,
       device: {
-        type: Sequelize.STRING,
-        length: 100
+        type: Sequelize.STRING
       },
       sdk: {
-        type: Sequelize.STRING,
-        length: 100
+        type: Sequelize.STRING(10)
       },
       version: {
-        type: Sequelize.STRING,
-        length: 100
+        type: Sequelize.STRING(10)
       },
       phone: {
-        type: Sequelize.STRING,
-        length: 100
+        type: Sequelize.STRING(20)
       },
       socket_id: {
-        type: Sequelize.STRING,
-        length: 100
+        type: Sequelize.STRING(100)
       }
     });
   },
