@@ -19,7 +19,7 @@
         <a ui-sref="dashboard.bot({id: bot.id})">{{bot.device}}</a>
       </td>
       <td class="{{bot.status? 'text-success' : 'text-danger'}}">{{bot.status ? 'ONLINE' : 'OFFLINE'}}</td>
-      <td>{{bot.uid | uppercase}}</td>
+      <td>{{bot.uid}}</td>
       <td>{{bot.updated | amCalendar:referenceTime:formats}}</td>
       <td>{{bot.provider}}</td>
       <td>{{bot.phone}}</td>

@@ -7,7 +7,9 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" ui-sref="dashboard.home">AdoBot Panel</a>
+        <a class="navbar-brand" ui-sref="dashboard.home">
+          AdoBot Panel
+        </a>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -19,5 +21,6 @@
     </div>
   </nav>
   <div class="container">
+    <div class="alert alert-danger" ng-if="!connected && connected !== undefined">Panel is offline!</div>
     <ui-view></ui-view>
   </div>

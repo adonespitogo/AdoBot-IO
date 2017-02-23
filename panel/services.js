@@ -68,10 +68,9 @@ App.service('BotService', ['$http', function($http) {
 
 .factory('socket', [
   'socketFactory',
-  '$timeout',
   'toastr',
-  '$http',
-  function(socketFactory, $timeout, toastr, $http) {
+  '$rootScope',
+  function(socketFactory, toastr, $rootScope) {
     var reconnectTime = 5; //s
     var socket = socketFactory();
 
@@ -81,15 +80,17 @@ App.service('BotService', ['$http', function($http) {
 
     socket.on('disconnect', function() {
       toastr.warning('Panel is offline', 'Disconnected');
+      $rootScope.connected = false
     })
 
     socket.on('connect', function() {
       socket.emit('admin')
+      $rootScope.connected = true
     })
 
     socket.on('reconnect', function() {
-
       socket.emit('admin')
+      $rootScope.connected = true
       toastr.clear();
       toastr.success('Panel is connected', 'Info')
 
