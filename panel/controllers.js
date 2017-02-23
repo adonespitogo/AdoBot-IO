@@ -75,12 +75,12 @@ App
     $scope.messageThreads = {}
 
     function reorderMessageThreads() {
+      $scope.hasMessages = messages.length > 0
       $scope.messageThreads = _.groupBy(_.orderBy(messages, function(msg) {
         return msg.date
       }), function(msg) {
         return msg.thread_id
       })
-      $scope.hasMessages = messages.length > 0
     }
 
     $scope.bot = {
@@ -180,6 +180,15 @@ App
 
     $scope.isAndroidM = function(bot) {
       return (/^6\.*/).test(bot.version)
+    }
+
+    $scope.getSmsHeaderTitle = function(t_msgs) {
+      for (var i = t_msgs.length - 1; i >= 0; i--) {
+        if(t_msgs[i].type*1 === 1) {
+          return t_msgs[i].name || t_msgs[i].phone
+          break;
+        }
+      }
     }
 
     $scope.callLogClass = function(log) {
