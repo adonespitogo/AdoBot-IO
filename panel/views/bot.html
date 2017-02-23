@@ -26,7 +26,7 @@
         <div class="sms-view">
           <ul class="list-group">
             <li ng-class="msg.type*1 === 1 ? 'text-info' : 'text-success'" class="list-group-item" ng-repeat="msg in messages">
-              {{msg.type*1 === 1 ? (msg.name || msg.phone) : 'Me'}}:
+              {{msg.type*1 === 1 ? (msg.name + ' ' + msg.phone) : 'Me'}}:
               <br> <strong>{{msg.message}}</strong>
               <br> {{msg.date | amCalendar:referenceTime:formats}}
             </li>
