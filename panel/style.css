@@ -9,7 +9,8 @@ a {
 }
 
 /*sms--------------*/
-.sms-view {
-  max-height: 300px;
+.sms-view , .call-logs-view {
+  max-height: 700px;
   overflow-y: scroll;
+  padding-right: 15px;
 }

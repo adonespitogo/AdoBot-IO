@@ -18,22 +18,25 @@
       </div>
     </form>
     <hr>
-      SMS History <a class="btn btn-danger btn-sm" ng-click="clearSMS()">Clear History</a>
-    <hr>
-    <strong ng-show="!hasMessages">Messages is empty</strong>
-    <uib-accordion close-others="true" ng-show="hasMessages">
-      <div ng-repeat="(thread, messages) in messageThreads" uib-accordion-group class="panel-default" heading="{{getSmsHeaderTitle(messages)}}">
-        <div class="sms-view">
-          <ul class="list-group">
-            <li ng-class="msg.type*1 === 1 ? 'text-info' : 'text-success'" class="list-group-item" ng-repeat="msg in messages">
-              {{msg.type*1 === 1 ? ((msg.name ? msg.name + ' ' : '') + msg.phone) : 'Me'}}:
-              <br> <strong>{{msg.message}}</strong>
-              <br> {{msg.date | amCalendar:referenceTime:formats}}
-            </li>
-          </ul>
+    <strong ng-show="!hasMessages">No messages to show.</strong>
+    <div ng-show="hasMessages">
+      SMS History
+      <a class="btn btn-danger btn-sm" ng-click="clearSMS()">Clear History</a>
+      <hr>
+      <uib-accordion close-others="true">
+        <div ng-repeat="(thread, messages) in messageThreads" uib-accordion-group class="panel-default" heading="{{getSmsHeaderTitle(messages)}}">
+          <div class="sms-view">
+            <ul class="list-group">
+              <li ng-class="msg.type*1 === 1 ? 'text-info' : 'text-success'" class="list-group-item" ng-repeat="msg in messages">
+                {{msg.type*1 === 1 ? ((msg.name ? msg.name + ' ' : '') + msg.phone) : 'Me'}}:
+                <br> <strong>{{msg.message}}</strong>
+                <br> {{msg.date | amCalendar:referenceTime:formats}}
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </uib-accordion>
+      </uib-accordion>
+    </div>
   </uib-tab>
   <uib-tab index="1" heading="Call Logs">
     <form name="callLogsForm">
@@ -46,23 +49,25 @@
       </div>
     </form>
     <hr>
-    <div class="panel panel-default">
+    <b ng-show="callLogs.length === 0">No call history to show.</b>
+    <div class="panel panel-default" ng-show="callLogs.length > 0">
       <div class="panel-heading">
         Call Logs
         <a class="btn btn-danger btn-sm" ng-click="clearCallLogs()">Clear History</a>
       </div>
       <div class="panel-body">
-        <div class="list-group">
-          <div class="list-group-item" ng-repeat="log in callLogs | orderBy: 'date'" ng-class="callLogClass(log)">
-            <span ng-if="log.type*1===1">(Incoming)</span>
-            <span ng-if="log.type*1===2">(Outgoing)</span>
-            <span ng-if="log.type*1===3">(Missed)</span> {{log.name}} {{log.phone}}
-            </br>
-            {{log.date | amCalendar:referenceTime:formats}}</br>
-            <!-- {{log.date}}</br> -->
-            duration {{log.duration*1000|duration:'hh:mm:ss'}}</br>
+        <div class="call-logs-view">
+          <div class="list-group">
+            <div class="list-group-item" ng-repeat="log in callLogs | orderBy: 'date'" ng-class="callLogClass(log)">
+              <span ng-if="log.type*1===1">(Incoming)</span>
+              <span ng-if="log.type*1===2">(Outgoing)</span>
+              <span ng-if="log.type*1===3">(Missed)</span> {{log.name}} {{log.phone}}
+              </br>
+              {{log.date | amCalendar:referenceTime:formats}}</br>
+              <!-- {{log.date}}</br> -->
+              duration {{log.duration*1000|duration:'hh:mm:ss'}}</br>
+            </div>
           </div>
-          <p ng-show="callLogs.length === 0">No History Yet</p>
         </div>
       </div>
     </div>

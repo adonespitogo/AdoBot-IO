@@ -158,6 +158,7 @@ App
       if (data.uid === $scope.bot.uid) {
         messages = [];
         $scope.messageThreads = {}
+        $scope.hasMessages = false
       }
     })
 
