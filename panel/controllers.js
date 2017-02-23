@@ -70,7 +70,19 @@ App
     $scope.num_call_logs = 100;
     $scope.numbersms = 100;
 
-    $scope.messages = [];
+    var messages = []
+    $scope.hasMessages = false
+    $scope.messageThreads = {}
+
+    function reorderMessageThreads() {
+      $scope.messageThreads = _.groupBy(_.orderBy(messages, function(msg) {
+        return msg.date
+      }), function(msg) {
+        return msg.thread_id
+      })
+      $scope.hasMessages = messages.length > 0
+    }
+
     $scope.bot = {
       id: params.id
     };
@@ -91,7 +103,8 @@ App
       $scope.bot = res.data;
 
       MessageService.fetch($scope.bot.uid).then(function(res) {
-        $scope.messages = res.data;
+        messages = res.data
+        reorderMessageThreads()
       })
 
       CommandService.getPending($scope.bot.uid).then(function(res) {
@@ -137,12 +150,14 @@ App
     })
 
     $scope.$on('socket:message:created', function(e, message) {
-      $scope.messages.push(message);
+      messages.push(message);
+      reorderMessageThreads()
     })
 
     $scope.$on('socket:messages:cleared', function(e, data) {
       if (data.uid === $scope.bot.uid) {
-        $scope.messages = [];
+        messages = [];
+        $scope.messageThreads = {}
       }
     })
 

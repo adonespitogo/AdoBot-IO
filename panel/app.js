@@ -1,6 +1,5 @@
 App = angular.module('AdoBot', [
     'ui.router',
-    'ui.router.stateHelper',
     'ngRoute',
     'btford.socket-io',
     'ui.bootstrap',

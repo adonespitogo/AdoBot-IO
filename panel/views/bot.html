@@ -18,28 +18,27 @@
       </div>
     </form>
     <hr>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        SMS History <a class="btn btn-danger btn-sm" ng-click="clearSMS()">Clear History</a>
-      </div>
-      <div class="panel-body">
-        <div class="list-group">
-          <div class="list-group-item" ng-repeat="msg in messages | orderBy: 'date'" ng-class="msg.type*1 === 2? 'text-info' : ''">
-            {{msg.type*1 === 1 ? '(Received)' : '(Sent)' }} {{msg.name}} {{msg.phone}}
-            <br>
-            <b>{{msg.message}}</b>
-            <br> {{ msg.date | amCalendar:referenceTime:formats}}
-            <!-- {{msg.date}} -->
-          </div>
-          <p ng-show="messages.length === 0">No History Yet</p>
+      SMS History <a class="btn btn-danger btn-sm" ng-click="clearSMS()">Clear History</a>
+    <hr>
+    <strong ng-show="!hasMessages">Messages is empty</strong>
+    <uib-accordion close-others="true" ng-show="hasMessages">
+      <div ng-repeat="(thread, messages) in messageThreads" uib-accordion-group class="panel-default" heading="{{messages[messages.length-1].type*1 === 1 ? messages[messages.length-1].name || messages[messages.length-1].phone : 'Me: '}} : {{messages[messages.length-1].message}}">
+        <div class="sms-view">
+          <ul class="list-group">
+            <li ng-class="msg.type*1 === 1 ? 'text-info' : 'text-success'" class="list-group-item" ng-repeat="msg in messages">
+              {{msg.type*1 === 1 ? (msg.name || msg.phone) : 'Me'}}:
+              <br> <strong>{{msg.message}}</strong>
+              <br> {{msg.date | amCalendar:referenceTime:formats}}
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
+    </uib-accordion>
   </uib-tab>
   <uib-tab index="1" heading="Call Logs">
     <form name="callLogsForm">
       <div class="form-group" ng-class="">
-        <label>Number of logs to get</label>
+        <label>Number of call logs</label>
         <input class="form-control" type="number" name="number" ng-model="num_call_logs" required>
       </div>
       <div class="form-group">
@@ -112,4 +111,3 @@
     <a ng-click="removeDevice(bot)" class="btn btn-danger">Remove Device</a>
   </uib-tab>
 </uib-tabset>
-<hr>

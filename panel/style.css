@@ -7,3 +7,9 @@ a {
 .tab-pane {
   padding-top: 15px;
 }
+
+/*sms--------------*/
+.sms-view {
+  max-height: 300px;
+  overflow-y: scroll;
+}
