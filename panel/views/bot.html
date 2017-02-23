@@ -1,7 +1,7 @@
 <h1>
-  <span ng-show="!bot.updated">Device: {{bot.device}}</span>
-  <span class="text-success" ng-show="bot.status && bot.updated">Device: {{bot.device}} (online)</span>
-  <span class="text-danger" ng-show="!bot.status && bot.updated">Device: {{bot.device}} (offline)</span>
+  <span ng-show="!bot.updated">{{bot.device}}</span>
+  <span class="text-success" ng-show="bot.status && bot.updated">{{bot.device}} (online)</span>
+  <span class="text-danger" ng-show="!bot.status && bot.updated">{{bot.device}} (offline)</span>
 </h1>
 <p>Last seen {{bot.updated | amCalendar:referenceTime:formats}}</p>
 <!-- <p class="text-success" ng-show="bot.status">ONLINE</p>
