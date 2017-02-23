@@ -83,7 +83,7 @@
       </div>
     </form>
   </uib-tab>
-  <uib-tab index="3" heading="Permissions" ng-if="isAndroidM(bot)">
+  <uib-tab index="3" heading="Permissions">
     <table class="table">
       <thead>
         <tr>
@@ -101,7 +101,7 @@
         </tr>
       </tbody>
     </table>
-    <p ng-show="permissions.length === 0">No info to show</p>
+    <b ng-show="permissions.length === 0">No info to show</b>
   </uib-tab>
   <uib-tab index="4" heading="Pending Commands">
     <div class="list-group">

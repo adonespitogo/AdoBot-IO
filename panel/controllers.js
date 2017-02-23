@@ -179,10 +179,6 @@ App
       }
     })
 
-    $scope.isAndroidM = function(bot) {
-      return (/^6\.*/).test(bot.version)
-    }
-
     $scope.getSmsHeaderTitle = function(t_msgs) {
       for (var i = t_msgs.length - 1; i >= 0; i--) {
         if (t_msgs[i].type * 1 === 1) {
