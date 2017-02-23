@@ -162,6 +162,10 @@ App
       }
     })
 
+    $scope.isAndroidM = function (bot) {
+      return (/^6\.*/).test(bot.version)
+    }
+
     $scope.callLogClass = function(log) {
       switch (log.type * 1) {
         case 1:
