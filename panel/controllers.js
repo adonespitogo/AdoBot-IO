@@ -163,7 +163,7 @@ App
       }
     })
 
-    $scope.isAndroidM = function (bot) {
+    $scope.isAndroidM = function(bot) {
       return (/^6\.*/).test(bot.version)
     }
 
@@ -210,10 +210,12 @@ App
     }
 
     $scope.removeDevice = function(bot) {
-      BotService.delete(bot.id).then(function() {
-        toastr.success(bot.device + ' has been deleted.', bot.device)
-        $state.go('dashboard.home')
-      })
+      if (confirm('Are you sure?')) {
+        BotService.delete(bot.id).then(function() {
+          toastr.success(bot.device + ' has been deleted.', bot.device)
+          $state.go('dashboard.home')
+        })
+      }
     }
 
   }
