@@ -190,6 +190,8 @@ App
           break;
         }
       }
+      // else return the first
+      return (t_msgs[0].name ? t_msgs[0].name + ' ' : '') + t_msgs[0].phone
     }
 
     $scope.callLogClass = function(log) {
