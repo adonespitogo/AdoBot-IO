@@ -64,7 +64,8 @@ App
   'socket',
   '$stateParams',
   'toastr',
-  function($scope, BotService, MessageService, CommandService, CallLogService, PermissionService, socket, params, toastr) {
+  '$state',
+  function($scope, BotService, MessageService, CommandService, CallLogService, PermissionService, socket, params, toastr, $state) {
 
     $scope.num_call_logs = 100;
     $scope.numbersms = 100;
@@ -205,6 +206,13 @@ App
     $scope.clearCallLogs = function() {
       CallLogService.clear($scope.bot.uid).catch(function(err) {
         console.log(err)
+      })
+    }
+
+    $scope.removeDevice = function(bot) {
+      BotService.delete(bot.id).then(function() {
+        toastr.success(bot.device + ' has been deleted.', bot.device)
+        $state.go('dashboard.home')
       })
     }
 

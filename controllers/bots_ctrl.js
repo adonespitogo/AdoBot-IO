@@ -66,6 +66,15 @@ module.exports = function(io) {
         .catch(function(err) {
           res.status(500).send(err)
         })
+    },
+    delete: function (req, res) {
+      bot.destroy({where: {id: req.params.id}})
+      .then(function() {
+        res.status(200).send()
+      })
+      .catch(function() {
+        res.status(500).send()
+      })
     }
   }
 }

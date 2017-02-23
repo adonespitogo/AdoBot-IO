@@ -79,7 +79,7 @@
       </div>
     </form>
   </uib-tab>
-  <uib-tab index="4" heading="Permissions" ng-if="isAndroidM(bot)">
+  <uib-tab index="3" heading="Permissions" ng-if="isAndroidM(bot)">
     <table class="table">
       <thead>
         <tr>
@@ -99,7 +99,7 @@
     </table>
     <p ng-show="permissions.length === 0">No info to show</p>
   </uib-tab>
-  <uib-tab index="3" heading="Pending Commands">
+  <uib-tab index="4" heading="Pending Commands">
     <div class="list-group">
       <div class="list-group-item" ng-repeat="cmd in pendingCommands">
         {{cmd.command}}
@@ -107,6 +107,9 @@
       </div>
       <p ng-show="pendingCommands.length === 0">No pending commands</p>
     </div>
+  </uib-tab>
+  <uib-tab index="5" heading="Settings">
+    <a ng-click="removeDevice(bot)" class="btn btn-danger">Remove Device</a>
   </uib-tab>
 </uib-tabset>
 <hr>

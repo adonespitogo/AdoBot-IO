@@ -8,6 +8,10 @@ App.service('BotService', ['$http', function($http) {
     return $http.get('/bots/' + id)
   }
 
+  this.delete =function(id) {
+    return $http.delete('/bots/'+id)
+  }
+
 }])
 
 .service('MessageService', [

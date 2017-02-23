@@ -16,6 +16,7 @@ module.exports = function Routes(app, io) {
   app.get('/pending-commands', commands_ctrl.pendingCommands)
   app.get('/bots', auth, bots_ctrl.index)
   app.get('/bots/:id', auth, bots_ctrl.show)
+  app.delete('/bots/:id', auth, bots_ctrl.delete)
   app.post('/add-command', auth, commands_ctrl.addCommand)
   app.get('/get-commands', auth, commands_ctrl.getCommands)
   app.delete('/commands/:id', auth, commands_ctrl.delete)
