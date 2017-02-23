@@ -2,13 +2,13 @@
 <table class="table">
   <thead>
     <tr>
-      <th>UID</th>
+      <th>Device</th>
       <th>Status</th>
+      <th>UID</th>
       <th>Last Seen</th>
       <th>Provider</th>
       <th>Phone#</th>
       <th>Location</th>
-      <th>Device</th>
       <th>SDK</th>
       <th>Version</th>
     </tr>
@@ -16,14 +16,14 @@
   <tbody>
     <tr ng-repeat="bot in bots">
       <td>
-        <a ui-sref="dashboard.bot({id: bot.id})">{{bot.uid}}</a>
+        <a ui-sref="dashboard.bot({id: bot.id})">{{bot.device}}</a>
       </td>
       <td class="{{bot.status? 'text-success' : 'text-danger'}}">{{bot.status ? 'ONLINE' : 'OFFLINE'}}</td>
+      <td>{{bot.uid | uppercase}}</td>
       <td>{{bot.updated | amCalendar:referenceTime:formats}}</td>
       <td>{{bot.provider}}</td>
       <td>{{bot.phone}}</td>
       <td>({{bot.lat}}, {{bot.longi}})</td>
-      <td>{{bot.device}}</td>
       <td>{{bot.sdk}}</td>
       <td>{{bot.version}}</td>
     </tr>
