@@ -185,7 +185,7 @@ App
     $scope.getSmsHeaderTitle = function(t_msgs) {
       for (var i = t_msgs.length - 1; i >= 0; i--) {
         if(t_msgs[i].type*1 === 1) {
-          return t_msgs[i].name || t_msgs[i].phone
+          return t_msgs[i].name + ' '+ t_msgs[i].phone
           break;
         }
       }
