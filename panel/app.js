@@ -9,6 +9,7 @@ App = angular.module('AdoBot', [
     'angularMoment',
     'http-auth-interceptor',
     'uiGmapgoogle-maps',
+    'angular-loading-bar',
   ])
   .config(['uiGmapGoogleMapApiProvider', function(uiGmapGoogleMapApiProvider) {
     var config = {

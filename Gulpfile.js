@@ -23,6 +23,7 @@ var js_libs = [
   './panel/libs/js/http-auth-interceptor.min.js',
   './panel/libs/js/ui-bootstrap-2.5.0.min.js',
   './panel/libs/js/ui-bootstrap-tpls-2.5.0.min.js',
+  './panel/libs/js/angular-loading-bar.min.js',
 ]
 
 var app_js = [
@@ -46,6 +47,7 @@ gulp.task('js:build', [], function() {
 var css_libs = [
   './panel/libs/css/bootstrap.min.css',
   './panel/libs/css/angular-toastr.min.css',
+  './panel/libs/css/angular-loading-bar.min.css',
 ]
 
 var app_css = [
