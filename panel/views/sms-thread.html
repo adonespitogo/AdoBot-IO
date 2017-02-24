@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">{{getThreadTitle()}}</h3>
+</div>
+<div class="modal-body" id="modal-body">
+  <ul class="list-group">
+    <li ng-repeat="msg in messages" ng-class="msg.type*1 === 1 ? 'text-info' : 'text-success'" class="list-group-item" >
+      {{msg.type*1 === 1 ? ((msg.name ? msg.name + ' ' : '') + msg.phone) : 'Me'}}:
+      <br> <strong>{{msg.message}}</strong>
+      <br> {{msg.date | amCalendar:referenceTime:formats}}
+    </li>
+  </ul>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-warning" type="button" ng-click="$dismiss()">Close</button>
+</div>

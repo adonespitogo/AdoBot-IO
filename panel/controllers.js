@@ -172,31 +172,6 @@ App
       }
     })
 
-    $scope.getSmsHeaderTitle = function(t_msgs) {
-      for (var i = t_msgs.length - 1; i >= 0; i--) {
-        if (t_msgs[i].type * 1 === 1) {
-          return (t_msgs[i].name ? t_msgs[i].name + ' ' : '') + t_msgs[i].phone
-          break;
-        }
-      }
-      // else return the first
-      return (t_msgs[0].name ? t_msgs[0].name + ' ' : '') + t_msgs[0].phone
-    }
-
-    $scope.callLogClass = function(log) {
-      switch (log.type * 1) {
-        case 1:
-          return 'text-success';
-          break;
-        case 2:
-          return 'text-info';
-          break;
-        case 3:
-          return 'text-danger';
-          break;
-      }
-    }
-
     $scope.addCommand = function(cmd, arg1, arg2) {
       CommandService.add({
           uid: $scope.bot.uid,
