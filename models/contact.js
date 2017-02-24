@@ -8,7 +8,10 @@ var Model = sequelize.define('Contact', {
     primaryKey: true
   },
   uid: Sequelize.STRING(50),
-  contact_id: Sequelize.INTEGER,
+  contact_id: {
+    type: Sequelize.INTEGER,
+    unique: true
+  },
   name: Sequelize.STRING(50),
   phone_numbers: Sequelize.STRING
 }, {
