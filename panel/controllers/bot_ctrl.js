@@ -1,14 +1,4 @@
-App
-
-  .controller('RootCtrl', ['$scope', function($scope) {
-  $scope.logout = function() {
-    localStorage.removeItem('username')
-    localStorage.removeItem('password')
-    window.location.reload()
-  }
-}])
-
-.controller('BotCtrl', [
+App.controller('BotCtrl', [
   '$scope',
   'BotService',
   'MessageService',
