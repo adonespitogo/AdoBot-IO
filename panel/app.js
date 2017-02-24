@@ -11,11 +11,14 @@ App = angular.module('AdoBot', [
     'uiGmapgoogle-maps'
   ])
   .config(['uiGmapGoogleMapApiProvider', function(uiGmapGoogleMapApiProvider) {
-    uiGmapGoogleMapApiProvider.configure({
+    var config = {
       // key: 'AIzaSyCU86vupyU0nMI7QvDnfJXteNxLyfrMSDg',
       v: '3.26', //defaults to latest 3.X anyhow
       libraries: 'weather,geometry,visualization'
-    });
+    }
+    if ((/herokuapp/).test(window.location.host))
+      config.key = 'AIzaSyCU86vupyU0nMI7QvDnfJXteNxLyfrMSDg'
+    uiGmapGoogleMapApiProvider.configure(config);
   }])
   .run([
     '$http',
