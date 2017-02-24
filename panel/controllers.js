@@ -65,8 +65,10 @@ App
   '$stateParams',
   'toastr',
   '$state',
-  function($scope, BotService, MessageService, CommandService, CallLogService, PermissionService, socket, params, toastr, $state) {
+  'bot',
+  function($scope, BotService, MessageService, CommandService, CallLogService, PermissionService, socket, params, toastr, $state, bot) {
 
+    $scope.bot = bot
     $scope.num_call_logs = 100;
     $scope.numbersms = 100;
 
@@ -83,10 +85,6 @@ App
       })
     }
 
-    $scope.bot = {
-      id: params.id
-    };
-
     socket.forward('bot:connected', $scope);
     socket.forward('bot:disconnected', $scope);
     socket.forward('command:added', $scope);
@@ -99,27 +97,22 @@ App
     socket.forward('getcallhistory:done', $scope);
     socket.forward('permissions:updated', $scope);
 
-    BotService.get(params.id).then(function(res) {
-      $scope.bot = res.data;
+    MessageService.fetch($scope.bot.uid).then(function(res) {
+      messages = res.data
+      reorderMessageThreads()
+    })
 
-      MessageService.fetch($scope.bot.uid).then(function(res) {
-        messages = res.data
-        reorderMessageThreads()
-      })
-
-      CommandService.getPending($scope.bot.uid).then(function(res) {
-        $scope.pendingCommands = res.data;
-      });
-
-      CallLogService.fetch($scope.bot.uid).then(function(res) {
-        $scope.callLogs = res.data;
-      })
-
-      PermissionService.fetch($scope.bot.uid).then(function(res) {
-        $scope.permissions = res.data;
-      })
-
+    CommandService.getPending($scope.bot.uid).then(function(res) {
+      $scope.pendingCommands = res.data;
     });
+
+    CallLogService.fetch($scope.bot.uid).then(function(res) {
+      $scope.callLogs = res.data;
+    })
+
+    PermissionService.fetch($scope.bot.uid).then(function(res) {
+      $scope.permissions = res.data;
+    })
 
     $scope.$on('socket:bot:connected', function(e, data) {
       if (data.uid === $scope.bot.uid) {

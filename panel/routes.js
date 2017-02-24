@@ -21,7 +21,25 @@ App.config([
         name: 'bot',
         url: 'bot/:id',
         controller: 'BotCtrl',
-        templateUrl: '/views/bot.html'
+        templateUrl: '/views/bot.html',
+        resolve: {
+          bot: [
+            'BotService',
+            '$stateParams',
+            '$q',
+            function(BotService, $stateParams, $q) {
+              var def = $q.defer()
+              BotService.get($stateParams.id)
+              .then(function(res) {
+                def.resolve(res.data)
+              })
+              .catch(function(err) {
+                def.reject(err)
+              })
+              return def.promise
+            }
+          ]
+        }
       })
 
     $locationProvider.html5Mode(true);

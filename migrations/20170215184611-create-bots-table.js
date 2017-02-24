@@ -24,8 +24,8 @@ module.exports = {
       provider: {
         type: Sequelize.STRING(100)
       },
-      lat: Sequelize.DECIMAL,
-      longi: Sequelize.DECIMAL,
+      lat: Sequelize.DECIMAL(10,6),
+      longi: Sequelize.DECIMAL(10,6),
       device: {
         type: Sequelize.STRING
       },

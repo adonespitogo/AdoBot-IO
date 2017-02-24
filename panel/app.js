@@ -7,8 +7,16 @@ App = angular.module('AdoBot', [
     'toastr',
     'angular-duration-format',
     'angularMoment',
-    'http-auth-interceptor'
+    'http-auth-interceptor',
+    'uiGmapgoogle-maps'
   ])
+  .config(['uiGmapGoogleMapApiProvider', function(uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+      // key: 'AIzaSyCU86vupyU0nMI7QvDnfJXteNxLyfrMSDg',
+      v: '3.26', //defaults to latest 3.X anyhow
+      libraries: 'weather,geometry,visualization'
+    });
+  }])
   .run([
     '$http',
     '$rootScope',

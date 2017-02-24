@@ -1,16 +1,25 @@
 body {
   padding-top: 70px;
 }
+
 a {
   cursor: pointer;
 }
+
 .tab-pane {
   padding-top: 15px;
 }
 
+
 /*sms--------------*/
-.sms-view , .call-logs-view {
+
+.sms-view,
+.call-logs-view {
   max-height: 700px;
   overflow-y: scroll;
   padding-right: 15px;
+}
+
+.angular-google-map-container {
+  height: 400px;
 }

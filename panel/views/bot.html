@@ -7,6 +7,14 @@
 <!-- <p class="text-success" ng-show="bot.status">ONLINE</p>
 <p class="text-danger" ng-show="!bot.status">OFFLINE</p> -->
 <uib-tabset active="active">
+  <uib-tab index="4" heading="Location">
+    <div class="map-view">
+      <ui-gmap-google-map center='{latitude: bot.lat, longitude: bot.longi}' zoom='15'>
+        <ui-gmap-marker idKey='bot.id' coords='{latitude: bot.lat, longitude: bot.longi}'>
+        </ui-gmap-marker>
+      </ui-gmap-google-map>
+    </div>
+  </uib-tab>
   <uib-tab index="0" heading="SMS">
     <form name="smsForm">
       <div class="form-group" ng-class="">
@@ -84,7 +92,7 @@
     </form>
   </uib-tab>
   <uib-tab index="3" heading="Permissions">
-    <table class="table">
+    <table class="table" ng-show="permissions.length > 0">
       <thead>
         <tr>
           <th>Permission</th>
@@ -103,7 +111,7 @@
     </table>
     <b ng-show="permissions.length === 0">No info to show</b>
   </uib-tab>
-  <uib-tab index="4" heading="Pending Commands">
+  <uib-tab index="5" heading="Pending Commands">
     <div class="list-group">
       <div class="list-group-item" ng-repeat="cmd in pendingCommands">
         {{cmd.command}}
@@ -112,7 +120,7 @@
       <p ng-show="pendingCommands.length === 0">No pending commands</p>
     </div>
   </uib-tab>
-  <uib-tab index="5" heading="Settings">
+  <uib-tab index="6" heading="Settings">
     <a ng-click="removeDevice(bot)" class="btn btn-danger">Remove Device</a>
   </uib-tab>
 </uib-tabset>
