@@ -1,6 +1,5 @@
 const gulp = require('gulp')
 const concat = require('gulp-concat')
-const watch = require('gulp-watch')
 
 // javascripts -----------------------------
 var js_libs = [
