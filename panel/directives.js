@@ -12,14 +12,7 @@ angular.module('AdoBot')
         link: function($scope, elem, attrs) {
 
           $scope.getThreadTitle = function() {
-            for (var i = $scope.messages.length - 1; i >= 0; i--) {
-              if ($scope.messages[i].type * 1 === 1) {
-                return ($scope.messages[i].name ? $scope.messages[i].name + ' ' : '') + $scope.messages[i].phone
-                break;
-              }
-            }
-            // all are sent messages
-            return $scope.messages[0].phone
+            return ($scope.messages[0].name ? $scope.messages[0].name + ' ' : '') + $scope.messages[0].phone
           }
 
           elem.on('click', function() {
