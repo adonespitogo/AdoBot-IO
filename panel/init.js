@@ -4,7 +4,7 @@ $(document).ready(function() {
 
   if (!username || !password) {
     window.history.pushState(null, 'login', '/')
-    angular.bootstrap(document.getElementById('app'), ['Login']);
+    angular.bootstrap(document.body, ['Login']);
   } else {
 
     $.post('/login', {
@@ -12,11 +12,10 @@ $(document).ready(function() {
         password: password
       })
       .done(function() {
-        angular.bootstrap(document.getElementById('app'), ['AdoBot'])
+        angular.bootstrap(document.body, ['AdoBot'])
       })
       .fail(function() {
-        angular.bootstrap(document.getElementById('app'), ['Login']);
+        angular.bootstrap(document.body, ['Login']);
       })
   }
 })
-

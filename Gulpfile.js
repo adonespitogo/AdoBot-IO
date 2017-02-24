@@ -8,6 +8,7 @@ var js_libs = [
   './panel/libs/js/lodash.min.js',
   './panel/libs/js/moment.min.js',
   './panel/libs/js/socket.io.min.js',
+  // angular libs
   './panel/libs/js/angular.min.js',
   './panel/libs/js/angular-animate.min.js',
   './panel/libs/js/angular-duration-format.js',
@@ -34,7 +35,7 @@ var app_js = [
   './panel/services/**/*.js',
 ]
 
-gulp.task('js:build', function() {
+gulp.task('js:build', [], function() {
   return gulp.src(js_libs.concat(app_js))
     .pipe(concat('application.js'))
     .pipe(gulp.dest('./panel/dist/js'))
@@ -48,8 +49,7 @@ var css_libs = [
 ]
 
 var app_css = [
-  './panel/style.css',
-  './panel/loading.css',
+  './panel/css/**/*.css',
 ]
 
 gulp.task('css:build', function() {
