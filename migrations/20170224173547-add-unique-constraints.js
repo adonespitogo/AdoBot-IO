@@ -1,4 +1,6 @@
 'use strict';
+
+var sequelize = require('../config/sequelize')
 var q = require('q')
 
 module.exports = {
@@ -10,14 +12,13 @@ module.exports = {
       Example:
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
     */
-    var q1 = queryInterface.changeColumn('messages', 'date', {
-      type: Sequelize.STRING(50),
-    });
-    var q2 = queryInterface.changeColumn('call_logs', 'date', {
-      type: Sequelize.STRING(50),
-      unique: true
-    });
-    return q.all([q1, q2])
+
+    var q1 = sequelize.query('ALTER TABLE messages ADD CONSTRAINT u_msg UNIQUE (uid,message_id);')
+    var q2 = sequelize.query('ALTER TABLE call_logs ADD CONSTRAINT u_call_log UNIQUE (uid,call_id);')
+    var q3 = sequelize.query('ALTER TABLE contacts ADD CONSTRAINT u_contact UNIQUE (uid,contact_id);')
+
+    return q.all([q1, q2, q3])
+
   },
 
   down: function(queryInterface, Sequelize) {
@@ -28,13 +29,5 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
-    var q1 = queryInterface.changeColumn('messages', 'date', {
-      type: Sequelize.DATE
-    });
-    var q2 = queryInterface.changeColumn('call_logs', 'date', {
-      type: Sequelize.DATE,
-      unique: true
-    });
-    return q.all([q1, q2])
   }
 };

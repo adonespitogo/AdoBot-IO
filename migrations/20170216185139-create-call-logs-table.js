@@ -19,17 +19,9 @@ module.exports = {
       call_id: Sequelize.INTEGER,
       type: Sequelize.INTEGER,
       name: Sequelize.STRING(20),
-      date: {
-        type: Sequelize.DATE,
-        unique: true
-      },
+      date: Sequelize.STRING(50),
       phone: Sequelize.STRING(20),
       duration: Sequelize.INTEGER
-    }, {
-      indexes: [{
-        unique: true,
-        fiels: ['date']
-      }]
     });
   },
 

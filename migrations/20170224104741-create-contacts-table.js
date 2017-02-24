@@ -16,10 +16,7 @@ module.exports = {
         primaryKey: true
       },
       uid: Sequelize.STRING(50),
-      contact_id: {
-        type: Sequelize.INTEGER,
-        unique: true
-      },
+      contact_id: Sequelize.INTEGER,
       name: Sequelize.STRING(50),
       phone_numbers: Sequelize.STRING
     });
