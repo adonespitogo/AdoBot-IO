@@ -32,7 +32,7 @@
       <a class="btn btn-danger btn-sm" ng-click="clearSMS()">Clear History</a>
       <hr>
       <div class="list-group">
-        <a  ng-repeat="(thread, messages) in messageThreads" class="list-group-item" sms-thread thread="thread" messages="messages"></a>
+        <a ng-repeat="(thread, messages) in messageThreads" class="list-group-item" sms-thread thread="thread" messages="messages"></a>
       </div>
     </div>
   </uib-tab>
@@ -63,18 +63,29 @@
       </div>
     </div>
   </uib-tab>
-  <uib-tab index="2" heading="Update APK">
-    <form name="updateForm">
-      <div class="form-group" ng-class="">
-        <label>URL of the new apk</label>
-        <input class="form-control" type="text" name="url" ng-model="update_url" required>
-      </div>
-      <div class="form-group">
-        <button ng-disabled="updateForm.$invalid" class="btn btn-primary" ng-click="addCommand('promptupdate', update_url)">Prompt Update</button>
-      </div>
-    </form>
+  <uib-tab index="3" heading="Contacts">
+    <button class="btn btn-primary" ng-click="addCommand('getcontacts')">Get Contacts</button>
+    <button class="btn btn-danger" ng-click="deleteContacts()">Clear Contacts</button>
+    <hr>
+    <table class="table" ng-show="contacts.length > 0">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone Number/s</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="contact in contacts">
+          <td>{{contact.name}}</td>
+          <td>
+            {{contact.phone_numbers}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <b ng-show="contacts.length === 0">No info to show</b>
   </uib-tab>
-  <uib-tab index="3" heading="Permissions">
+  <uib-tab index="4" heading="Permissions">
     <table class="table" ng-show="permissions.length > 0">
       <thead>
         <tr>
@@ -104,6 +115,16 @@
     </div>
   </uib-tab>
   <uib-tab index="6" heading="Settings">
+    <form name="updateForm">
+      <div class="form-group" ng-class="">
+        <label>URL of the new apk</label>
+        <input class="form-control" type="text" name="url" ng-model="update_url" required>
+      </div>
+      <div class="form-group">
+        <button ng-disabled="updateForm.$invalid" class="btn btn-primary" ng-click="addCommand('promptupdate', update_url)">Update APK</button>
+      </div>
+    </form>
+    <hr>
     <a ng-click="removeDevice(bot)" class="btn btn-danger">Remove Device</a>
   </uib-tab>
 </uib-tabset>

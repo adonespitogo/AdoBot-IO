@@ -27,6 +27,19 @@ App.service('BotService', ['$http', function($http) {
   }
 ])
 
+.service('ContactService', [
+  '$http',
+  function($http) {
+    this.fetch = function(uid) {
+      return $http.get('/contacts/' + uid)
+    }
+
+    this.clear = function(uid) {
+      return $http.delete('/contacts/' + uid)
+    }
+  }
+])
+
 .service('CallLogService', [
   '$http',
   function($http) {
