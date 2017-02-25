@@ -26,7 +26,6 @@ App
         if ($scope.bots[i].uid == data.uid) {
           $scope.bots[i] = data;
           $scope.bots = angular.copy($scope.bots);
-          toastr.success('Device has connected', data.device)
           break;
         }
       }
@@ -37,7 +36,6 @@ App
         if ($scope.bots[i].uid == data.uid) {
           $scope.bots[i] = data;
           $scope.bots = angular.copy($scope.bots);
-          toastr.error('Device has disconnected', data.device)
           break;
         }
       }
