@@ -26,9 +26,9 @@
  - Download and install Heroku CLI as outlined [here](https://devcenter.heroku.com/articles/heroku-command-line)
  - If you don't have git command line tool, you might as well [install](https://git-scm.com/downloads) it
  - After installation of Heroku CLI, open command line and type:
-   ```
-   $ heroku login
-   ```
+```
+$ heroku login
+```
    Enter your login email and password
  - Go to "Settings" tab
  - Find the "Info" section and copy the `Heroku Git URL` field. It looks like `https://git.heroku.com/your-app.git`
