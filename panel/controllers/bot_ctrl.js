@@ -70,21 +70,18 @@ App.controller('BotCtrl', [
     $scope.$on('socket:bot:connected', function(e, data) {
       if (data.uid === bot.uid) {
         $scope.bot = data;
-        toastr.success('Device status changed to online', 'Online')
       }
     })
 
     $scope.$on('socket:bot:updated', function(e, data) {
       if (data.uid === bot.uid) {
         $scope.bot = data;
-        toastr.success('Device info updated.', data.device)
       }
     })
 
     $scope.$on('socket:bot:disconnected', function(e, bot) {
       if ($scope.bot.uid === bot.uid) {
         $scope.bot = bot;
-        toastr.error('Device status changed to offline', 'Offline')
       }
     })
 
