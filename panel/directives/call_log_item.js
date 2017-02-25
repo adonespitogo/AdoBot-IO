@@ -1,31 +1,4 @@
-angular.module('AdoBot')
-  .directive('smsThread', [
-    '$uibModal',
-    function($uibModal) {
-      return {
-        restrict: 'AE',
-        scope: {
-          thread: '=',
-          messages: '='
-        },
-        template: '<span >{{getThreadTitle()}}</span>',
-        link: function($scope, elem, attrs) {
-
-          $scope.getThreadTitle = function() {
-            return ($scope.messages[0].name ? $scope.messages[0].name + ' ' : '') + $scope.messages[0].phone
-          }
-
-          elem.on('click', function() {
-            $uibModal.open({
-              templateUrl: '/views/sms-thread.html',
-              scope: $scope
-            })
-          })
-
-        }
-      }
-    }
-  ])
+App
   .directive('callLogItem', [
     function() {
       return {

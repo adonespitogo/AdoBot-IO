@@ -23,13 +23,33 @@ App.controller('BotCtrl', [
 
     $scope.contacts = []
 
+    function updateMap () {
+      $scope.map = {
+        center: {
+          latitude: $scope.bot.lat,
+          longitude: $scope.bot.longi,
+        },
+        zoom: 15
+      }
+    }
+
+    updateMap()
+
     function reorderMessageThreads() {
       $scope.hasMessages = messages.length > 0
-      $scope.messageThreads = _.groupBy(_.orderBy(messages, function(msg) {
+      $scope.messageThreads = _.chain(messages).orderBy(function(msg) {
         return msg.date
-      }), function(msg) {
+      })
+      .groupBy(function(msg) {
         return msg.thread_id
       })
+      .mapValues(function(messages) {
+        return {
+          last_date: messages[messages.length-1].date,
+          messages: messages
+        }
+      })
+      .value()
     }
 
     socket.forward('bot:connected', $scope);
@@ -76,6 +96,7 @@ App.controller('BotCtrl', [
     $scope.$on('socket:bot:updated', function(e, data) {
       if (data.uid === bot.uid) {
         $scope.bot = data;
+        updateMap()
         toastr.success('Bot status updated', data.device)
       }
     })

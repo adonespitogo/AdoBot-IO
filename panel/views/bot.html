@@ -9,8 +9,8 @@
 <uib-tabset active="active">
   <uib-tab index="0" heading="Location">
     <div class="map-view">
-      <ui-gmap-google-map center='{latitude: bot.lat, longitude: bot.longi}' zoom='15'>
-        <ui-gmap-marker idKey='bot.id' coords='{latitude: bot.lat, longitude: bot.longi}'>
+      <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+        <ui-gmap-marker idKey='bot.id' coords='map.center'>
         </ui-gmap-marker>
       </ui-gmap-google-map>
     </div>
@@ -32,7 +32,7 @@
       <a class="btn btn-danger btn-sm" ng-click="clearSMS()">Clear History</a>
       <hr>
       <div class="list-group">
-        <a ng-repeat="(thread, messages) in messageThreads" class="list-group-item" sms-thread thread="thread" messages="messages"></a>
+        <a ng-repeat="(thread, dateMessages) in messageThreads | orderObjectBy: 'last_date'" class="list-group-item" sms-thread thread="thread" messages="dateMessages.messages"></a>
       </div>
     </div>
   </uib-tab>

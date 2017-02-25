@@ -33,6 +33,7 @@ var app_js = [
   './panel/controllers/**/*.js',
   './panel/directives/**/*.js',
   './panel/services/**/*.js',
+  './panel/filters/**/*.js',
 ]
 
 gulp.task('js:build', [], function() {

@@ -102,7 +102,7 @@ module.exports = function BotHandler(io, socket, device) {
           }
         })
         .then(function() {
-          notifyAdmin('commands:cleared')
+          notifyAdmin('commands:cleared', device)
         })
         .catch(catchError)
       })
