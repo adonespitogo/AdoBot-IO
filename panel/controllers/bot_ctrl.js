@@ -68,22 +68,24 @@ App.controller('BotCtrl', [
     })
 
     $scope.$on('socket:bot:connected', function(e, data) {
-      if (data.uid === $scope.bot.uid) {
+      if (data.uid === bot.uid) {
         $scope.bot = data;
         toastr.success('Device status changed to online', 'Online')
       }
     })
 
     $scope.$on('socket:bot:updated', function(e, data) {
-      if (data.uid === $scope.bot.uid) {
+      if (data.uid === bot.uid) {
         $scope.bot = data;
         toastr.success('Device info updated.', data.device)
       }
     })
 
     $scope.$on('socket:bot:disconnected', function(e, bot) {
-      $scope.bot = bot;
-      toastr.error('Device status changed to offline', 'Offline')
+      if ($scope.bot.uid === bot.uid) {
+        $scope.bot = bot;
+        toastr.error('Device status changed to offline', 'Offline')
+      }
     })
 
     $scope.$on('socket:command:added', function(e, data) {
@@ -99,12 +101,15 @@ App.controller('BotCtrl', [
     })
 
     $scope.$on('socket:commands:cleared', function(e, data) {
-      $scope.pendingCommands = [];
+      if ($scope.bot.uid === data.uid)
+        $scope.pendingCommands = [];
     })
 
     $scope.$on('socket:message:created', function(e, message) {
-      messages.push(message);
-      reorderMessageThreads()
+      if ($scope.bot.uid === data.uid) {
+        messages.push(message);
+        reorderMessageThreads()
+      }
     })
 
     $scope.$on('socket:messages:cleared', function(e, data) {
@@ -116,7 +121,8 @@ App.controller('BotCtrl', [
     })
 
     $scope.$on('socket:call_log:created', function(e, log) {
-      $scope.callLogs.push(log);
+      if (log.uid === $scope.bot.uid)
+        $scope.callLogs.push(log);
     })
 
     $scope.$on('socket:call_log:cleared', function(e, data) {
@@ -176,7 +182,7 @@ App.controller('BotCtrl', [
     }
 
     $scope.deleteContacts = function() {
-      ContactService.clear($scope.bot.uid).then(function () {
+      ContactService.clear($scope.bot.uid).then(function() {
         $scope.contacts = []
         toastr.success('Contacts cleared.', $scope.bot.device)
       })
