@@ -33,7 +33,7 @@
  - Go to "Settings" tab
  - Find the "Info" section and copy the `Heroku Git URL` field. It looks like `https://git.heroku.com/your-app.git`
  - Download this repository and extract the contents of the zip file
- - Then `cd` into the project directory. ex `cd ~/Downloads/AdoBot`
+ - Then `cd` into the the extracted directory. ex `cd ~/Downloads/AdoBot`
  - Then enter the commands below (Remember to change `your-app` to the name of your app)
     ```
     $ git init
