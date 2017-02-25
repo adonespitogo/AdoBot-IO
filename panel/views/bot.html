@@ -16,23 +16,43 @@
     </div>
   </uib-tab>
   <uib-tab index="1" heading="SMS">
-    <form name="smsForm">
-      <div class="form-group" ng-class="">
-        <label>Number of SMS</label>
-        <input class="form-control" type="number" name="number" ng-model="numbersms" required>
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Send Text Message</h3>
+        <form name="sendSmsForm">
+          <div class="form-group" ng-class="">
+            <label>Text message</label>
+            <textarea class="form-control" ng-model="text_message" name="text_message" rows="10" required=""></textarea>
+          </div>
+          <div class="form-group" ng-class="">
+            <label>Send to number</label>
+            <input class="form-control" type="text" name="sendto_number" ng-model="sendto_number" rows="10" required/>
+          </div>
+          <div class="form-group">
+            <button type="submit" ng-disabled="sendSmsForm.$invalid" class="btn btn-primary" ng-click="addCommand('sendsms', sendto_number, text_message)">Send SMS</button>
+          </div>
+        </form>
       </div>
-      <div class="form-group">
-        <button type="submit" ng-disabled="smsForm.$invalid" class="btn btn-primary" ng-click="addCommand('getsms', numbersms)">Get SMS</button>
-      </div>
-    </form>
-    <hr>
-    <strong ng-show="!hasMessages">No messages to show.</strong>
-    <div ng-show="hasMessages">
-      SMS History
-      <a class="btn btn-danger btn-sm" ng-click="clearSMS()">Clear History</a>
-      <hr>
-      <div class="list-group">
-        <a ng-repeat="(thread, dateMessages) in messageThreads | orderObjectBy: 'last_date'" class="list-group-item" sms-thread thread="thread" messages="dateMessages.messages"></a>
+      <div class="col-md-6">
+        <h3>Retreive SMS</h3>
+        <form name="smsForm">
+          <div class="form-group" ng-class="">
+            <label>Number of SMS</label>
+            <input class="form-control" type="number" name="number" ng-model="numbersms" required>
+          </div>
+          <div class="form-group">
+            <button type="submit" ng-disabled="smsForm.$invalid" class="btn btn-primary" ng-click="addCommand('getsms', numbersms)">Get SMS</button>
+            <a class="btn btn-danger" ng-click="clearSMS()">Clear History</a>
+          </div>
+        </form>
+        <hr>
+        <strong ng-show="!hasMessages">No messages to show.</strong>
+        <div ng-show="hasMessages">
+          <p><strong>SMS List</strong></p>
+          <div class="list-group">
+            <a ng-repeat="(thread, dateMessages) in messageThreads | orderObjectBy: 'last_date'" class="list-group-item" sms-thread thread="thread" messages="dateMessages.messages"></a>
+          </div>
+        </div>
       </div>
     </div>
   </uib-tab>
