@@ -1,0 +1,24 @@
+
+
+.chat-bubble-container.received {
+  padding-right: 25%;
+}
+
+.chat-bubble-container.sent {
+  padding-left: 25%;
+}
+
+.chat-bubble-container > .chat-bubble {
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.chat-bubble-container.received > .chat-bubble {
+  background: #e9ebee;
+  color: #000;
+}
+.chat-bubble-container.sent > .chat-bubble {
+  background: steelblue;
+  color: #fff;
+}
