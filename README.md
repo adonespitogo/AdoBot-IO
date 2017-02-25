@@ -19,8 +19,8 @@
  - Click `Reveal Config Vars` button
  - Copy the VALUE of `CLEARDB_DATABASE_URL` KEY
  - Create a new KEY named `DATABASE_URL` and the paste into the `VALUE` field the copied value of `CLEARDB_DATABASE_URL`. Click `ADD` to save.
- - Create a new KEY named `ADMIN_USERNAME` and the VALUE will the username used to login into the panel later. Then click `ADD` button
- - Create a new KEY named `ADMIN_PASSWORD` and the VALUE will the username used to login into the panel later. Then click `ADD` button
+ - Create a new KEY named `ADMIN_USERNAME` and the VALUE will be your desired username used to login into the panel later. Then click `ADD` button
+ - Create a new KEY named `ADMIN_PASSWORD` and the VALUE will be your desired password used to login into the panel later. Then click `ADD` button
 
 ## Upload the source to Heroku
  - Download and install Heroku CLI as outlined [here](https://devcenter.heroku.com/articles/heroku-command-line)
