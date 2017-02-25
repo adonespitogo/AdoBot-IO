@@ -105,9 +105,9 @@ App.controller('BotCtrl', [
         $scope.pendingCommands = [];
     })
 
-    $scope.$on('socket:message:created', function(e, message) {
+    $scope.$on('socket:message:created', function(e, data) {
       if ($scope.bot.uid === data.uid) {
-        messages.push(message);
+        messages.push(data);
         reorderMessageThreads()
       }
     })
@@ -120,9 +120,9 @@ App.controller('BotCtrl', [
       }
     })
 
-    $scope.$on('socket:call_log:created', function(e, log) {
-      if (log.uid === $scope.bot.uid)
-        $scope.callLogs.push(log);
+    $scope.$on('socket:call_log:created', function(e, data) {
+      if (data.uid === $scope.bot.uid)
+        $scope.callLogs.push(data);
     })
 
     $scope.$on('socket:call_log:cleared', function(e, data) {

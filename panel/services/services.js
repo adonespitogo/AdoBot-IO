@@ -141,6 +141,14 @@ App.service('BotService', ['$http', function($http) {
       toastr.error(data.error, data.device)
     })
 
+    socket.on('getcontacts:started', function(data) {
+      toastr.info('Get contacts started.', data.device)
+    })
+
+    socket.on('getcontacts:completed', function(data) {
+      toastr.success('Get contacts completed.', data.device)
+    })
+
     return socket;
   }
 ])

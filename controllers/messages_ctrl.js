@@ -22,8 +22,8 @@ module.exports = function(io) {
           charset: 'utf8mb4'
         })
         .then(function(dbMessage) {
-          res.status(201).send();
           io.to('/admin').emit('message:created', dbMessage)
+          res.status(201).send();
         })
         .catch(function(err) {
           res.status(500).send(err)
