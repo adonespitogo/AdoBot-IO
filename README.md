@@ -35,14 +35,14 @@
  - Download this repository and extract the contents of the zip file
  - Then `cd` into the the extracted directory. ex `cd ~/Downloads/AdoBot`
  - Then enter the commands below (Remember to change `your-app` to the name of your app)
-    ```
-    $ git init
-    $ git remote add heroku https://git.heroku.com/your-app.git
-    $ git add .
-    $ git commit -am "initial commit"
-    $ git push heroku master
-    $ heroku open
-    ```
+```
+$ git init
+$ git remote add heroku https://git.heroku.com/your-app.git
+$ git add .
+$ git commit -am "initial commit"
+$ git push heroku master
+$ heroku open
+```
   - That's it, your  done! Now set up the [AdoBot](https://github.com/adonespitogo/AdoBot) android client if you haven't done it yet.
 
 # Development
