@@ -9,8 +9,8 @@
 <uib-tabset active="active">
   <uib-tab index="0" heading="Location">
     <div class="map-view">
-      <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-        <ui-gmap-marker idKey='bot.id' coords='map.center'>
+      <ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="true">
+        <ui-gmap-marker idKey='bot.id' coords='{latitude: bot.lat, longitude: bot.longi}'>
         </ui-gmap-marker>
       </ui-gmap-google-map>
     </div>
