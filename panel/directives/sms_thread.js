@@ -10,8 +10,8 @@ App
         messages: '='
       },
       template: `<div >
-{{getThreadTitle()}}
-<span class='pull-right'>{{messages[messages.length -1].date | amCalendar}}</span>
+          {{getThreadTitle()}}
+          <small class='pull-right'>{{messages[messages.length -1].date | amCalendar}}</small>
       </div>`,
       link: function($scope, elem, attrs) {
 
