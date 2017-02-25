@@ -46,9 +46,12 @@ $ heroku open
   - That's it, your  done! Now set up the [AdoBot](https://github.com/adonespitogo/AdoBot) android client if you haven't done it yet.
 
 # Development
+
 ## System Requirements
+
 - NodeJS
 - MySql
+
 ## Setup
 
 Create `adobot` mysql schema/database.
@@ -56,6 +59,7 @@ Create `adobot` mysql schema/database.
 Edit `./config/config.json` to your preferences.
 
 Install dependencies:
+
 ```
 $ sudo npm install -g sequelize-cli gulp gulp-cli
 $ npm install
