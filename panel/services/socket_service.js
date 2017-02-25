@@ -26,15 +26,15 @@ App
     })
 
     socket.on('bot:created', function(data) {
-      toastr.success('New device has connected (' + device.uid + ')', data.device)
+      toastr.success('New device has connected', data.device)
     })
 
     socket.on('bot:connected', function(device) {
-      toastr.success('Device has connected (' + device.uid + ')', device.device)
+      toastr.success('Device has connected', device.device)
     });
 
     socket.on('bot:disconnected', function(device) {
-      toastr.error('Device has disconnected (' + device.uid + ')', device.device)
+      toastr.error('Device has disconnected', device.device)
     });
 
     socket.on('getmessages:started', function(device) {

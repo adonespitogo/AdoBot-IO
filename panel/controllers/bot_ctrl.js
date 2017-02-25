@@ -76,7 +76,7 @@ App.controller('BotCtrl', [
     $scope.$on('socket:bot:updated', function(e, data) {
       if (data.uid === bot.uid) {
         $scope.bot = data;
-        toastr.success('Bot status updated.', data.device)
+        toastr.success('Bot status updated', data.device)
       }
     })
 
