@@ -9,6 +9,7 @@ module.exports = function(io) {
     notify: function(req, res, next) {
 
       io.to('/admin').emit(req.body.event, req.body)
+      res.status(200).send()
 
     }
   }

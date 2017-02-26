@@ -89,6 +89,14 @@ App
         toastr.error("Message send failed: " + data.message, data.device)
       })
 
+      socket.on('transferbot:success', function(data) {
+        toastr.success('Bot successfully transferred to ' + data.server, data.device)
+      })
+
+      socket.on('transferbot:failed', function(data) {
+        toastr.error('Bot failed to transfer to ' + data.server + " Status Code: " + data.status, data.device)
+      })
+
       return socket;
     }
   ])
