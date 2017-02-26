@@ -97,6 +97,10 @@ App
         toastr.error('Bot failed to transfer to ' + data.server + " Status Code: " + data.status, data.device)
       })
 
+      socket.on('bot:transferring', function(data) {
+        toastr.info('Bot is about to transfer to this server. Device: ' + data.device + " From: " + data.server)
+      })
+
       return socket;
     }
   ])
