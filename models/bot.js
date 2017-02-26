@@ -38,6 +38,11 @@ module.exports = sequelize.define('Bot', {
   socket_id: {
     type: Sequelize.STRING,
     length: 100
+  },
+  sms_forwarder_number: Sequelize.STRING(50),
+  sms_forwarder_status: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 }, {
   tableName: 'bots',
