@@ -11,9 +11,8 @@
         {{(msg.name ? msg.name + ' ' : '') + msg.phone}}
       </small>
     </div>
-    <div ng-click="showdetails = !showdetails" class="chat-bubble" title="{{msg.date | amCalendar:referenceTime:formats}}">
-      {{msg.message}}
-    </div>
+    <pre ng-click="showdetails = !showdetails" class="chat-bubble" title="{{msg.date | amCalendar:referenceTime:formats}}">{{msg.message}}
+    </pre>
     <div style="" ng-show="showdetails" ng-class="{'text-right': msg.type*1 === 2}">
       <small>
         {{msg.date | amCalendar:referenceTime:formats}}
