@@ -64,21 +64,14 @@
       </div>
       <div class="form-group">
         <button ng-disabled="callLogsForm.$invalid" class="btn btn-primary" ng-click="addCommand('getcallhistory', num_call_logs)">Get Call History</button>
+        <a class="btn btn-danger" ng-click="clearCallLogs()">Clear History</a>
       </div>
     </form>
     <hr>
     <b ng-show="callLogs.length === 0">No call history to show.</b>
-    <div class="panel panel-default" ng-show="callLogs.length > 0">
-      <div class="panel-heading">
-        Call Logs
-        <a class="btn btn-danger btn-sm" ng-click="clearCallLogs()">Clear History</a>
-      </div>
-      <div class="panel-body">
-        <div class="call-logs-view">
-          <div class="list-group">
-            <div class="list-group-item" ng-repeat="log in callLogs | orderBy: 'date'" call-log-item="log">
-            </div>
-          </div>
+    <div class="call-logs-view" ng-show="callLogs.length > 0">
+      <div class="list-group">
+        <div class="list-group-item" ng-repeat="log in callLogs | orderBy: 'date'" call-log-item="log">
         </div>
       </div>
     </div>
