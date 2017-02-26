@@ -43,8 +43,8 @@
             <input class="form-control" type="text" name="bot.sms_forwarder_number" ng-model="bot.sms_forwarder_number" rows="10" required/>
           </div>
           <div class="form-group">
-            <button type="submit" ng-disabled="smsForwardForm.$invalid" class="btn btn-primary" ng-click="addCommand('smsforwarder', 'forward', bot.sms_forwarder_number)">Start Forwarding SMS</button>
-            <a class="btn btn-danger" ng-click="addCommand('smsforwarder', 'stop')">Stop Forwarding</a>
+            <button type="submit" ng-disabled="smsForwardForm.$invalid || bot.sms_forwarder_status" class="btn btn-primary" ng-click="addCommand('smsforwarder', 'forward', bot.sms_forwarder_number)">Start Forwarding SMS</button>
+            <a class="btn btn-danger" ng-disabled="!bot.sms_forwarder_status" ng-click="addCommand('smsforwarder', 'stop')">Stop Forwarding</a>
           </div>
         </form>
       </div>
