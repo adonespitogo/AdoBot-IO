@@ -21,6 +21,9 @@ App = angular.module('AdoBot', [
       config.key = 'AIzaSyCU86vupyU0nMI7QvDnfJXteNxLyfrMSDg'
     uiGmapGoogleMapApiProvider.configure(config);
   }])
+  .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
+  }])
   .run([
     '$http',
     '$rootScope',
