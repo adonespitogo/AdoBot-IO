@@ -10,7 +10,7 @@ function formatCommand(c) {
   } else if (!c['arg2']) {
     cmd = c.command + "(" + c['arg1'] + ")\n"
   } else {
-    cmd = c.command + "(" + c['arg1'] + "~~" + c['arg2'] + ")\n"
+    cmd = c.command + "(" + c['arg1'] + ", " + c['arg2'] + ")\n"
   }
   return cmd;
 }
