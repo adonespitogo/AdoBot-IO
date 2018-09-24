@@ -13,18 +13,18 @@ angular.module('AdoBot')
         link: function($scope, elem, attrs) {
 
           $scope.getThreadTitle = function() {
-            var msg = $scope.messages[0]
-            return (msg.name ? msg.name + ' ' : '') + msg.phone
-          }
+            var msg = $scope.messages[0];
+            return (msg.name ? msg.name + ' ' : '') + msg.phone;
+          };
 
           elem.on('click', function() {
             $uibModal.open({
               templateUrl: '/views/sms-thread.html',
               scope: $scope
-            })
-          })
+            });
+          });
 
         }
-      }
+      };
     }
-  ])
+  ]);
