@@ -1,4 +1,4 @@
-App
+window.App
 .directive('smsThread', [
   '$uibModal',
   '$filter',

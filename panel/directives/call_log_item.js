@@ -1,4 +1,4 @@
-App
+window.App
   .directive('callLogItem', [
     function() {
       return {

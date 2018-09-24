@@ -1,4 +1,4 @@
-App = angular.module('AdoBot', [
+window.App = angular.module('AdoBot', [
   'ui.router',
   'ngRoute',
   'btford.socket-io',

@@ -1,4 +1,4 @@
-App.controller('RootCtrl', ['$scope', function($scope) {
+window.App.controller('RootCtrl', ['$scope', function($scope) {
   $scope.logout = function() {
     localStorage.removeItem('username');
     localStorage.removeItem('password');

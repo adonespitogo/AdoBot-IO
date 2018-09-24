@@ -1,5 +1,4 @@
-App
-
+window.App
 .controller('HomeCtrl', [
   '$scope',
   'BotService',

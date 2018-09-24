@@ -1,4 +1,4 @@
-App.config([
+window.App.config([
   '$stateProvider',
   '$locationProvider',
   function($stateProvider, $locationProvider) {

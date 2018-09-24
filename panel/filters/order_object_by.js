@@ -1,4 +1,4 @@
-App
+window.App
 .filter('orderObjectBy', function() {
   return function(items, field, reverse) {
     var filtered = [];

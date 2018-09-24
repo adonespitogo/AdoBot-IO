@@ -1,4 +1,4 @@
-App.controller('BotCtrl', [
+window.App.controller('BotCtrl', [
   '$scope',
   'BotService',
   'MessageService',
