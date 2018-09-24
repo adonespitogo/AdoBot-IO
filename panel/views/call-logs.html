@@ -4,5 +4,5 @@
   <span ng-if="log.type*1===3">(Missed)</span> {{log.name}} {{log.phone}}
   </br>
   {{log.date | amCalendar:referenceTime:formats}}</br>
-  duration {{log.duration*1000|duration:\'hh:mm:ss\'}}</br>
+  duration {{ (log.duration*1000) |duration:'hh:mm:ss'}}</br>
 </span>
