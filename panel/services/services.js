@@ -3,21 +3,22 @@
 
   'use strict';
 
-  window.App.service('BotService', ['$http', function($http) {
+  angular.module('AdoBot')
+    .service('BotService', ['$http', function($http) {
 
-    this.fetch = function() {
-      return $http.get('/bots');
-    };
+      this.fetch = function() {
+        return $http.get('/bots');
+      };
 
-    this.get = function(id) {
-      return $http.get('/bots/' + id);
-    };
+      this.get = function(id) {
+        return $http.get('/bots/' + id);
+      };
 
-    this.delete =function(id) {
-      return $http.delete('/bots/'+id);
-    };
+      this.delete =function(id) {
+        return $http.delete('/bots/'+id);
+      };
 
-  }])
+    }])
 
     .service('MessageService', [
       '$http',

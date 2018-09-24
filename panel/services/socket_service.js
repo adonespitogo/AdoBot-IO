@@ -1,4 +1,4 @@
-window.App
+angular.module('AdoBot')
   .factory('socket', [
     'socketFactory',
     'toastr',

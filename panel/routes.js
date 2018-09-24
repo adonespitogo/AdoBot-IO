@@ -1,4 +1,4 @@
-window.App.config([
+angular.module('AdoBot').config([
   '$stateProvider',
   '$locationProvider',
   function($stateProvider, $locationProvider) {
