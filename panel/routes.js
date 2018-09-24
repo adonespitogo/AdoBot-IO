@@ -28,19 +28,19 @@ App.config([
             '$stateParams',
             '$q',
             function(BotService, $stateParams, $q) {
-              var def = $q.defer()
+              var def = $q.defer();
               BotService.get($stateParams.id)
               .then(function(res) {
-                def.resolve(res.data)
+                def.resolve(res.data);
               })
               .catch(function(err) {
-                def.reject(err)
-              })
-              return def.promise
+                def.reject(err);
+              });
+              return def.promise;
             }
           ]
         }
-      })
+      });
 
     $locationProvider.html5Mode(true);
 

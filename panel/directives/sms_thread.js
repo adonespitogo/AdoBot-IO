@@ -9,10 +9,7 @@ App
         thread: '=',
         messages: '='
       },
-      template: `<div >
-          {{getThreadTitle()}}
-          <small class='pull-right'>{{messages[messages.length -1].date | amCalendar}}</small>
-      </div>`,
+      templateUrl: '/views/sms-thread-entry.html',
       link: function($scope, elem, attrs) {
 
         $scope.getThreadTitle = function() {

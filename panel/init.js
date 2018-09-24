@@ -3,19 +3,19 @@ $(document).ready(function() {
     password = localStorage.getItem('password');
 
   if (!username || !password) {
-    window.history.pushState(null, 'login', '/')
+    window.history.pushState(null, 'login', '/');
     angular.bootstrap(document.body, ['Login']);
   } else {
 
     $.post('/login', {
-        username: username,
-        password: password
-      })
+      username: username,
+      password: password
+    })
       .done(function() {
-        angular.bootstrap(document.body, ['AdoBot'])
+        angular.bootstrap(document.body, ['AdoBot']);
       })
       .fail(function() {
         angular.bootstrap(document.body, ['Login']);
-      })
+      });
   }
-})
+});

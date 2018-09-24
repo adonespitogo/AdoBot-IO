@@ -1,5 +1,10 @@
+'use strict'
+
 const gulp = require('gulp')
 const concat = require('gulp-concat')
+const uglify = require('gulp-uglify')
+const jshint = require('gulp-jshint')
+const gutil = require('gulp-util')
 
 // javascripts -----------------------------
 var js_libs = [
@@ -36,10 +41,27 @@ var app_js = [
   './panel/filters/**/*.js',
 ]
 
-gulp.task('js:build', [], function() {
-  return gulp.src(js_libs.concat(app_js))
+gulp.task('lint', function () {
+  var s = gulp.src(app_js)
+  if (process.env.NODE_ENV != 'production') {
+    s = s
+      .pipe(jshint())
+      .pipe(jshint.reporter('default'))
+  }
+  return s;
+})
+
+gulp.task('js:build', ['lint'], function() {
+  var stream = gulp.src(js_libs.concat(app_js))
     .pipe(concat('application.js'))
-    .pipe(gulp.dest('./panel/dist/js'))
+
+  if (process.env.NODE_ENV === 'production') {
+    stream = stream
+      .pipe(uglify())
+      .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
+  }
+
+  return stream.pipe(gulp.dest('./panel/dist/js'))
 })
 
 // ------------ CSS -----------------------------
