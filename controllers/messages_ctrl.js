@@ -1,3 +1,4 @@
+var Q = require('q')
 var sequelize = require('../config/sequelize')
 var message = require('../models/message')
 var bot = require('../models/bot')
@@ -10,32 +11,45 @@ module.exports = function(io) {
       var uid = req.body.uid
 
       message.create({
-          uid: uid,
-          message_id: req.body.message_id,
-          thread_id: req.body.thread_id,
-          type: parseInt(req.body.type),
-          phone: req.body.phone,
-          name: req.body.name,
-          message: req.body.message,
-          date: req.body.date
-        }, {
-          charset: 'utf8mb4'
-        })
+        uid: uid,
+        message_id: req.body.message_id,
+        thread_id: req.body.thread_id,
+        type: parseInt(req.body.type),
+        phone: req.body.phone,
+        name: req.body.name,
+        message: req.body.message,
+        date: req.body.date
+      }, {
+        charset: 'utf8mb4'
+      })
         .then(function(dbMessage) {
           io.to('/admin').emit('message:created', dbMessage)
           res.status(201).send();
         })
         .catch(function(err) {
+          return message
+            .findOne({
+              where: { uid: uid, message_id: req.body.message_id, thread_id: req.body.thread_id }
+            })
+            .then(function (dbMessage) {
+              if (dbMessage) {
+                res.json(dbMessage);
+              } else {
+                return Q.reject(err);
+              }
+            });
+        })
+        .catch(function (err) {
           res.status(500).send(err)
         });
     },
     getMessages: function(req, res, next) {
 
       message.findAll({
-          where: {
-            uid: req.params.uid
-          }
-        })
+        where: {
+          uid: req.params.uid
+        }
+      })
         .then(function(dbMessages) {
           res.json(dbMessages)
         })
@@ -46,10 +60,10 @@ module.exports = function(io) {
     clearMessages: function(req, res, next) {
       var uid = req.params.uid;
       message.destroy({
-          where: {
-            uid: uid
-          }
-        })
+        where: {
+          uid: uid
+        }
+      })
         .then(function() {
           io.to('/admin').emit('messages:cleared', {
             uid: uid
