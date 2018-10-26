@@ -6,17 +6,22 @@ module.exports = function(io) {
     create: function(req, res, next) {
 
       var attrs = {
-        call_id: req.body.call_id,
+        call_id: parseInt(req.body.call_id),
         uid: req.body.uid,
         type: parseInt(req.body.type),
         name: req.body.name,
         date: req.body.date,
         phone: req.body.phone,
-        duration: req.body.duration
+        duration: parseInt(req.body.duration)
       }
 
       CallLog.findOne({
-        where: attrs
+        where: {
+          uid: req.body.uid,
+          call_id: req.body.call_id,
+          type: req.body.type,
+          duration: req.body.duration
+        }
       })
         .then(function (dbCallLog) {
           if (dbCallLog) {

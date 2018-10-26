@@ -24,7 +24,11 @@ module.exports = function(io) {
 
       message
         .findOne({
-          where: attrs
+          where: {
+            uid: uid,
+            message_id: req.body.message_id,
+            thread_id: req.body.thread_id
+          }
         })
         .then(function (dbMessage) {
           if (dbMessage) {
