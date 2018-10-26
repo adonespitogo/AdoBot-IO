@@ -4,6 +4,7 @@ var CallLog = require('../models/call_log')
 module.exports = function(io) {
   return {
     create: function(req, res, next) {
+
       var attrs = {
         call_id: req.body.call_id,
         uid: req.body.uid,
@@ -15,7 +16,7 @@ module.exports = function(io) {
       }
 
       CallLog.findOne({
-        where: {call_id: req.body.call_id}
+        where: attrs
       })
         .then(function (dbCallLog) {
           if (dbCallLog) {

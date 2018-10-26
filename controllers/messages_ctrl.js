@@ -8,26 +8,29 @@ console.log(bot)
 module.exports = function(io) {
   return {
     addMessage: function(req, res, next) {
+
       var uid = req.body.uid
+
+      var attrs = {
+        uid: uid,
+        message_id: req.body.message_id,
+        thread_id: req.body.thread_id,
+        type: parseInt(req.body.type),
+        phone: req.body.phone,
+        name: req.body.name,
+        message: req.body.message,
+        date: req.body.date
+      }
 
       message
         .findOne({
-          where: { uid: uid, message_id: req.body.message_id, thread_id: req.body.thread_id }
+          where: attrs
         })
         .then(function (dbMessage) {
           if (dbMessage) {
             res.json(dbMessage);
           } else {
-            return message.create({
-              uid: uid,
-              message_id: req.body.message_id,
-              thread_id: req.body.thread_id,
-              type: parseInt(req.body.type),
-              phone: req.body.phone,
-              name: req.body.name,
-              message: req.body.message,
-              date: req.body.date
-            }, {
+            return message.create(attrs, {
               charset: 'utf8mb4'
             })
               .then(function(dbMessage) {
