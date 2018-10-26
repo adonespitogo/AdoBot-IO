@@ -18,9 +18,9 @@ module.exports = function(io) {
       CallLog.findOne({
         where: {
           uid: req.body.uid,
-          call_id: req.body.call_id,
           type: req.body.type,
-          duration: req.body.duration
+          call_id: parseInt(req.body.call_id),
+          duration: parseInt(req.body.duration)
         }
       })
         .then(function (dbCallLog) {

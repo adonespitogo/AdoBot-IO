@@ -4,7 +4,7 @@ module.exports = function(io) {
   return {
     create: function(req, res) {
       Contact.findOne({
-        where: {uid: req.body.uid, contact_id: req.body.contact_id}
+        where: {uid: req.body.uid, contact_id: parseInt(req.body.contact_id)}
       })
         .then(function (dbContact) {
           if (dbContact) {

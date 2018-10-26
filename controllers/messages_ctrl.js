@@ -26,7 +26,7 @@ module.exports = function(io) {
         .findOne({
           where: {
             uid: uid,
-            message_id: req.body.message_id,
+            message_id: parseInt(req.body.message_id),
             thread_id: req.body.thread_id
           }
         })
