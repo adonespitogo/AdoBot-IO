@@ -27,7 +27,7 @@ module.exports = function(io) {
           where: {
             uid: uid,
             message_id: parseInt(req.body.message_id),
-            thread_id: req.body.thread_id
+            thread_id: parseInt(req.body.thread_id)
           }
         })
         .then(function (dbMessage) {
@@ -43,20 +43,6 @@ module.exports = function(io) {
               })
           }
         })
-
-      //.catch(function(err) {
-      //  return message
-      //    .findOne({
-      //      where: { uid: uid, message_id: req.body.message_id, thread_id: req.body.thread_id }
-      //    })
-      //    .then(function (dbMessage) {
-      //      if (dbMessage) {
-      //        res.json(dbMessage);
-      //      } else {
-      //        return Q.reject(err);
-      //      }
-      //    });
-      //})
         .catch(function (err) {
           console.log("Error", err.errors)
           res.status(500).send(err)
