@@ -7,13 +7,17 @@ module.exports = function(io) {
         where: {uid: req.body.uid, contact_id: req.body.contact_id}
       })
         .then(function (dbContact) {
-          if (dbContact)
+          if (dbContact) {
             return dbContact
-          else
+          }
+          else {
             return Contact.create(req.body)
+              .then(function(dbContact) {
+                io.to('/admin').emit('contact:created', dbContact)
+              })
+          }
         })
-        .then(function(dbContact) {
-          io.to('/admin').emit('contact:created', dbContact)
+        .then(function () {
           res.status(201).send()
         })
         .catch(function(err) {

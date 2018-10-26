@@ -17,7 +17,6 @@ module.exports = function(io) {
         .then(function (dbMessage) {
           if (dbMessage) {
             res.json(dbMessage);
-            return dbMessage
           } else {
             return message.create({
               uid: uid,
@@ -31,12 +30,13 @@ module.exports = function(io) {
             }, {
               charset: 'utf8mb4'
             })
+              .then(function(dbMessage) {
+                io.to('/admin').emit('message:created', dbMessage)
+                res.status(201).send();
+              })
           }
         })
-        .then(function(dbMessage) {
-          io.to('/admin').emit('message:created', dbMessage)
-          res.status(201).send();
-        })
+
       //.catch(function(err) {
       //  return message
       //    .findOne({
