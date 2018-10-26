@@ -40,6 +40,7 @@ module.exports = function(io) {
             });
         })
         .catch(function (err) {
+          console.log("Error", err.toString())
           res.status(500).send(err)
         });
     },
