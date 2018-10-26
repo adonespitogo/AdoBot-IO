@@ -13,9 +13,9 @@ module.exports = {
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
     */
 
-    var q1 = sequelize.query('ALTER TABLE messages DROP u_msg;')
-    var q2 = sequelize.query('ALTER TABLE call_logs DROP u_call_log;')
-    var q3 = sequelize.query('ALTER TABLE contacts DROP u_contact;')
+    var q1 = sequelize.query('ALTER TABLE messages DROP INDEX u_msg;')
+    var q2 = sequelize.query('ALTER TABLE call_logs DROP INDEX u_call_log;')
+    var q3 = sequelize.query('ALTER TABLE contacts DROP INDEX u_contact;')
 
     return q.all([q1, q2, q3])
 
