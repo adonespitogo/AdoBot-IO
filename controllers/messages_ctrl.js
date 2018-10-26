@@ -10,35 +10,46 @@ module.exports = function(io) {
     addMessage: function(req, res, next) {
       var uid = req.body.uid
 
-      message.create({
-        uid: uid,
-        message_id: req.body.message_id,
-        thread_id: req.body.thread_id,
-        type: parseInt(req.body.type),
-        phone: req.body.phone,
-        name: req.body.name,
-        message: req.body.message,
-        date: req.body.date
-      }, {
-        charset: 'utf8mb4'
-      })
+      message
+        .findOne({
+          where: { uid: uid, message_id: req.body.message_id, thread_id: req.body.thread_id }
+        })
+        .then(function (dbMessage) {
+          if (dbMessage) {
+            res.json(dbMessage);
+            return dbMessage
+          } else {
+            return message.create({
+              uid: uid,
+              message_id: req.body.message_id,
+              thread_id: req.body.thread_id,
+              type: parseInt(req.body.type),
+              phone: req.body.phone,
+              name: req.body.name,
+              message: req.body.message,
+              date: req.body.date
+            }, {
+              charset: 'utf8mb4'
+            })
+          }
+        })
         .then(function(dbMessage) {
           io.to('/admin').emit('message:created', dbMessage)
           res.status(201).send();
         })
-        .catch(function(err) {
-          return message
-            .findOne({
-              where: { uid: uid, message_id: req.body.message_id, thread_id: req.body.thread_id }
-            })
-            .then(function (dbMessage) {
-              if (dbMessage) {
-                res.json(dbMessage);
-              } else {
-                return Q.reject(err);
-              }
-            });
-        })
+      //.catch(function(err) {
+      //  return message
+      //    .findOne({
+      //      where: { uid: uid, message_id: req.body.message_id, thread_id: req.body.thread_id }
+      //    })
+      //    .then(function (dbMessage) {
+      //      if (dbMessage) {
+      //        res.json(dbMessage);
+      //      } else {
+      //        return Q.reject(err);
+      //      }
+      //    });
+      //})
         .catch(function (err) {
           console.log("Error", err.errors)
           res.status(500).send(err)
