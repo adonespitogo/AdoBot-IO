@@ -14,21 +14,21 @@ module.exports = function(io) {
         duration: req.body.duration
       }
 
-      CallLog.create(attrs)
+      CallLog.findOne({
+        where: {call_id: req.body.call_id}
+      })
+        .then(function (dbCallLog) {
+          if (dbCallLog) {
+            res.json(dbCallLog)
+            return dbCallLog
+          }
+          else {
+            return CallLog.create(attrs)
+          }
+        })
         .then (function (dbCallLog) {
           io.to('/admin').emit('call_log:created', dbCallLog)
           res.json(dbCallLog)
-        })
-        .catch(function (err) {
-          return CallLog.findOne({
-            where: {call_id: req.body.call_id}
-          })
-            .then(function (dbCallLog) {
-              if (dbCallLog)
-                res.json(dbCallLog)
-              else
-                return Q.reject(err)
-            })
         })
         .catch(function (err) {
           res.status(500).send(err)
