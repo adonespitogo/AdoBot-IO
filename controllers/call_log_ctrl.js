@@ -1,3 +1,4 @@
+var Q = require('q')
 var CallLog = require('../models/call_log')
 
 module.exports = function(io) {
@@ -14,36 +15,47 @@ module.exports = function(io) {
       }
 
       CallLog.create(attrs)
-      .then (function (dbCallLog) {
-        io.to('/admin').emit('call_log:created', dbCallLog)
-        res.json(dbCallLog)
-      })
-      .catch(function (err) {
-        res.status(500).send(err)
-      })
+        .then (function (dbCallLog) {
+          io.to('/admin').emit('call_log:created', dbCallLog)
+          res.json(dbCallLog)
+        })
+        .catch(function (err) {
+          return CallLog.findOne({
+            where: {call_id: req.body.call_id}
+          })
+            .then(function (dbCallLog) {
+              if (dbCallLog)
+                res.json(dbCallLog)
+              else
+                return Q.reject(err)
+            })
+        })
+        .catch(function (err) {
+          res.status(500).send(err)
+        })
 
     },
 
     showLogs: function (req, res, next) {
       var uid = req.params.uid
       CallLog.findAll({where: {uid: uid}})
-      .then(function (dbCallLogs) {
-        res.json(dbCallLogs)
-      })
-      .catch(function (err) {
-        res.status(500).send(err)
-      })
+        .then(function (dbCallLogs) {
+          res.json(dbCallLogs)
+        })
+        .catch(function (err) {
+          res.status(500).send(err)
+        })
     },
     clear: function (req, res, next) {
       var uid = req.params.uid
       CallLog.destroy({where: {uid: uid}})
-      .then(function(){
-        io.to('/admin').emit('call_log:cleared', {uid: uid})
-        res.status(200).send()
-      })
-      .catch(function(err) {
-        console.log(err)
-      })
+        .then(function(){
+          io.to('/admin').emit('call_log:cleared', {uid: uid})
+          res.status(200).send()
+        })
+        .catch(function(err) {
+          console.log(err)
+        })
     }
   }
 }
