@@ -13,10 +13,9 @@ module.exports = {
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
       */
 
-    //var q1 = sequelize.query('ALTER TABLE messages ADD CONSTRAINT u_msg UNIQUE (uid,message_id);')
-    var q1 = sequelize.query('ALTER TABLE messages DROP INDEX u_msg;')
-    var q2 = sequelize.query('ALTER TABLE call_logs DROP u_call_log;')
-    var q3 = sequelize.query('ALTER TABLE contacts DROP u_contact;')
+    var q1 = sequelize.query('ALTER TABLE messages ADD CONSTRAINT u_msg UNIQUE (uid,message_id);')
+    var q2 = sequelize.query('ALTER TABLE call_logs ADD CONSTRAINT u_call_log UNIQUE (uid,date,type);')
+    var q3 = sequelize.query('ALTER TABLE contacts ADD CONSTRAINT u_contact UNIQUE (uid,contact_id);')
 
     return q.all([q1, q2, q3])
 
