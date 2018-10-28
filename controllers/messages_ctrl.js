@@ -31,7 +31,7 @@ module.exports = function(io) {
           }
         })
         .then(function (dbMessage) {
-          if (dbMessage) {
+          if (dbMessage && dbMessage.name != 'UNKNOWN_CONTACT') {
             res.json(dbMessage);
           } else {
             return message.create(attrs, {
