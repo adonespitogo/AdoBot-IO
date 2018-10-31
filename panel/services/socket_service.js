@@ -80,6 +80,10 @@ angular.module('AdoBot')
         toastr.error('Unknown command: "' + data.command + '"', data.device);
       });
 
+      socket.on('command:added', function (data) {
+        toastr.info('Command added to pending commands', 'Device is offline');
+      });
+
       socket.on('sendmessage:success', function(data) {
         toastr.success("Message sent to " + data.phone + ": " + data.textmessage, data.device);
       });
