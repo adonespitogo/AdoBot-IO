@@ -81,7 +81,7 @@ angular.module('AdoBot')
       });
 
       socket.on('command:added', function (data) {
-        toastr.info('Command added to pending commands', 'Device is offline');
+        toastr.info('Command is currently pending', 'Device is offline');
       });
 
       socket.on('sendmessage:success', function(data) {
