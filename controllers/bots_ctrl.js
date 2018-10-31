@@ -71,24 +71,26 @@ module.exports = function(io) {
       Bot.findOne({where: {id: parseInt(req.params.id)}})
         .then(function (dbBot) {
 
+          var uid = dbBot.uid
+
           if (!dbBot)
             return Q.reject("Bot with id: " + req.params.id + " not found")
 
-          return Bot.destroy({where: {id: req.params.id}})
+          return dbBot.destroy()
             .then(function () {
-              return Message.destroy({where: {uid: dbBot.uid}})
+              return Message.destroy({where: {uid: uid}})
             })
             .then(function () {
-              return CallLog.destroy({where: {uid: dbBot.uid}})
+              return CallLog.destroy({where: {uid: uid}})
             })
             .then(function () {
-              return Command.destroy({where: {uid: dbBot.uid}})
+              return Command.destroy({where: {uid: uid}})
             })
             .then(function () {
-              return Contact.destroy({where: {uid: dbBot.uid}})
+              return Contact.destroy({where: {uid: uid}})
             })
             .then(function () {
-              return Permission.destroy({where: {uid: dbBot.uid}})
+              return Permission.destroy({where: {uid: uid}})
             })
 
         })
