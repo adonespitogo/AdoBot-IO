@@ -74,21 +74,21 @@ module.exports = function(io) {
           if (!dbBot)
             return Q.reject("Bot with id: " + req.params.id + " not found")
 
-          return Bot.destroy({where: {id: dbBot.uid}})
+          return Bot.destroy({where: {id: req.params.id}})
             .then(function () {
-              return Message.destroy({where: {id: dbBot.uid}})
+              return Message.destroy({where: {uid: dbBot.uid}})
             })
             .then(function () {
-              return CallLog.destroy({where: {id: dbBot.uid}})
+              return CallLog.destroy({where: {uid: dbBot.uid}})
             })
             .then(function () {
-              return Command.destroy({where: {id: dbBot.uid}})
+              return Command.destroy({where: {uid: dbBot.uid}})
             })
             .then(function () {
-              return Contact.destroy({where: {id: dbBot.uid}})
+              return Contact.destroy({where: {uid: dbBot.uid}})
             })
             .then(function () {
-              return Permission.destroy({where: {id: dbBot.uid}})
+              return Permission.destroy({where: {uid: dbBot.uid}})
             })
 
         })
