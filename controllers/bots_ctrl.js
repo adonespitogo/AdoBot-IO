@@ -1,10 +1,14 @@
-var bot = require('../models/bot')
-var permission = require('../models/permission')
+var Bot = require('../models/bot')
+var Message = require('../models/message.js')
+var CallLog = require('../models/call_log.js')
+var Command = require('../models/command.js')
+var Contact = require('../models/contact.js')
+var Permission = require('../models/permission')
 
 module.exports = function(io) {
   return {
     index: function(req, res, next) {
-      bot.findAll()
+      Bot.findAll()
         .then(function(db_bots) {
           res.json(db_bots)
         })
@@ -17,11 +21,11 @@ module.exports = function(io) {
       var attributes = req.body
       attributes.status = true
       attributes.updated = new Date()
-      bot.findOne({
-          where: {
-            uid: uid
-          }
-        })
+      Bot.findOne({
+        where: {
+          uid: uid
+        }
+      })
         .then(function(dbBot) {
           if (dbBot) {
             dbBot.update(attributes)
@@ -34,7 +38,7 @@ module.exports = function(io) {
               })
           } else {
             attributes.uid = uid
-            bot.create(attributes)
+            Bot.create(attributes)
               .then(function(dbBot) {
                 io.to('/admin').emit('bot:created', dbBot)
                 res.status(201).send()
@@ -51,7 +55,7 @@ module.exports = function(io) {
     },
     show: function(req, res, next) {
       var id = req.params.id;
-      bot.findById(id)
+      Bot.findById(id)
         .then(function(bot) {
           res.json(bot);
         })
@@ -60,13 +64,29 @@ module.exports = function(io) {
         })
     },
     delete: function (req, res) {
-      bot.destroy({where: {id: req.params.id}})
-      .then(function() {
-        res.status(200).send()
-      })
-      .catch(function() {
-        res.status(500).send()
-      })
+      Bot.destroy({where: {id: req.params.id}})
+        .then(function () {
+          return Message.destroy({where: {id: req.params.id}})
+        })
+        .then(function () {
+          return CallLog.destroy({where: {id: req.params.id}})
+        })
+        .then(function () {
+          return Command.destroy({where: {id: req.params.id}})
+        })
+        .then(function () {
+          return Contact.destroy({where: {id: req.params.id}})
+        })
+        .then(function () {
+          return Permission.destroy({where: {id: req.params.id}})
+        })
+        .then(function() {
+          res.status(200).send()
+        })
+        .catch(function() {
+          res.status(500).send()
+        })
     }
   }
 }
+

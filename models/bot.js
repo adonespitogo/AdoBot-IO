@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize')
 var sequelize = require('../config/sequelize')
 
-module.exports = sequelize.define('Bot', {
+var Bot = sequelize.define('Bot', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -48,3 +48,6 @@ module.exports = sequelize.define('Bot', {
   tableName: 'bots',
   timestamps: false
 })
+
+module.exports = Bot
+
