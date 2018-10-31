@@ -1,3 +1,6 @@
+
+var Q = require('q')
+
 var Bot = require('../models/bot')
 var Message = require('../models/message.js')
 var CallLog = require('../models/call_log.js')
@@ -64,21 +67,30 @@ module.exports = function(io) {
         })
     },
     delete: function (req, res) {
-      Bot.destroy({where: {id: req.params.id}})
-        .then(function () {
-          return Message.destroy({where: {id: req.params.id}})
-        })
-        .then(function () {
-          return CallLog.destroy({where: {id: req.params.id}})
-        })
-        .then(function () {
-          return Command.destroy({where: {id: req.params.id}})
-        })
-        .then(function () {
-          return Contact.destroy({where: {id: req.params.id}})
-        })
-        .then(function () {
-          return Permission.destroy({where: {id: req.params.id}})
+
+      Bot.findOne({where: {id: parseInt(req.params.id)}})
+        .then(function (dbBot) {
+
+          if (!dbBot)
+            return Q.reject("Bot with id: " + req.params.id + " not found")
+
+          return Bot.destroy({where: {id: dbBot.uid}})
+            .then(function () {
+              return Message.destroy({where: {id: dbBot.uid}})
+            })
+            .then(function () {
+              return CallLog.destroy({where: {id: dbBot.uid}})
+            })
+            .then(function () {
+              return Command.destroy({where: {id: dbBot.uid}})
+            })
+            .then(function () {
+              return Contact.destroy({where: {id: dbBot.uid}})
+            })
+            .then(function () {
+              return Permission.destroy({where: {id: dbBot.uid}})
+            })
+
         })
         .then(function() {
           res.status(200).send()
@@ -87,6 +99,7 @@ module.exports = function(io) {
           res.status(500).send()
         })
     }
+
   }
 }
 
