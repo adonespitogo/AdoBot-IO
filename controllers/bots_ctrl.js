@@ -71,10 +71,11 @@ module.exports = function(io) {
       Bot.findOne({where: {id: parseInt(req.params.id)}})
         .then(function (dbBot) {
 
-          var uid = dbBot.uid
 
           if (!dbBot)
             return Q.reject("Bot with id: " + req.params.id + " not found")
+
+          var uid = dbBot.uid
 
           return dbBot.destroy()
             .then(function () {
