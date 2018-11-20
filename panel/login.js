@@ -28,10 +28,8 @@ angular.module('Login', ['ui.router'])
             window.location.reload();
           })
           .catch(function() {
-            alert('Invalid username or password.');
-          })
-          .finally(function() {
             $scope.submitting = false;
+            alert('Invalid username or password.');
           });
       };
 
