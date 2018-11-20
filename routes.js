@@ -42,6 +42,6 @@ module.exports = function Routes(app, io) {
     res.status(404).send()
   })
   app.get('*', function(req, res, next) {
-    res.sendFile(path.join(__dirname, 'panel', 'index.html'));
+    res.sendFile(path.join(__dirname, './dist/index.html'));
   })
 }
