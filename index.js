@@ -7,7 +7,7 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({
   extended: true
 })); // for parsing application/x-www-form-urlencoded
-app.use(express.static('./panel'))
+app.use(express.static('./dist'))
 
 // logging
 app.use(function(req, res, next) {

@@ -1,11 +1,11 @@
-angular.module('Login', ['ui.router'])
+angular.module('Login', ['ui.router', 'templates'])
 
   .config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
 
     var loginState = {
       name: 'login',
       url: '/',
-      templateUrl: '/views/login.html',
+      templateUrl: 'login.html',
       controller: 'LoginCtrl'
     };
 
