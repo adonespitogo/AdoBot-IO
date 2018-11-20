@@ -15,10 +15,7 @@
           <label for="password">Password</label>
           <input class="form-control" id="password" name="password" ng-model="password" required type="password">
         </div>
-        <!--<div class="form-group" style="margin-top: 20px;">-->
-
-        <!--</div>-->
-        <button ng-disabled="submitting" ng-click="doLogin(username, password)" class="btn btn-primary" type="submit" ng-class="{'disabled': loginForm.$invalid}">
+        <button ng-disabled="submitting || loginForm.$invalid" ng-click="doLogin(username, password)" class="btn btn-primary" type="submit">
           {{submitting? "Logging in..." : "Sign In"}}
         </button>
       </form>
