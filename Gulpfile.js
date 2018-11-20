@@ -122,7 +122,9 @@ gulp.task('inject', ['js:build', 'css:build', 'templates', 'copy'], function() {
   var target = gulp.src('./dist/index.html');
   var sources = gulp.src(['./dist/**/*.js', './dist/**/*.css']);
 
-  return target.pipe(inject(sources, {relative: true})).pipe(gulp.dest('./dist'))
+  return target.pipe(inject(sources, {
+    ignorePath: 'dist'
+  })).pipe(gulp.dest('./dist'))
 })
 
 // ------------- BUILD ----------------------------
