@@ -4,7 +4,7 @@
       <h1 class="text-center">AdoBot</h1>
       <hr>
       <p class="lead text-center">
-        Sign In
+      Sign In
       </p>
       <form name="loginForm" novalidate>
         <div class="form-group" ng-class="{'has-error': (loginForm.username.$touched||loginForm.$submitted) && loginForm.username.$error.required}">
@@ -15,15 +15,16 @@
           <label for="password">Password</label>
           <input class="form-control" id="password" name="password" ng-model="password" required type="password">
         </div>
-        <div class="form-group" style="margin-top: 20px;">
-          <button ng-click="doLogin(username, password)" class="btn btn-primary" type="submit" ng-class="{'disabled': loginForm.$invalid}">
-            <span>Sign In</span>
-          </button>
-        </div>
+        <!--<div class="form-group" style="margin-top: 20px;">-->
+
+        <!--</div>-->
+        <button ng-disabled="submitting" ng-click="doLogin(username, password)" class="btn btn-primary" type="submit" ng-class="{'disabled': loginForm.$invalid}">
+          {{submitting? "Logging in..." : "Sign In"}}
+        </button>
       </form>
       <hr>
       <p class="text-center">
-        <a href="//github.com/adonespitogo/AdoBot" target="_blank">Fork AdoBot</a>
+      <a href="//github.com/adonespitogo/AdoBot" target="_blank">Fork AdoBot</a>
       </p>
     </div>
   </div>

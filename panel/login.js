@@ -18,7 +18,9 @@ angular.module('Login', ['ui.router'])
     '$http',
     function($scope, $http) {
 
+      $scope.submitting = false;
       $scope.doLogin = function(username, password) {
+        $scope.submitting = true;
         $http.post('/login', {username: username, password: password})
           .then(function () {
             localStorage.setItem('username', username);
@@ -27,6 +29,9 @@ angular.module('Login', ['ui.router'])
           })
           .catch(function() {
             alert('Invalid username or password.');
+          })
+          .finally(function() {
+            $scope.submitting = false;
           });
       };
 

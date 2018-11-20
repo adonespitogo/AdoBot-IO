@@ -65,13 +65,10 @@ Populate the database:
 ```
 $ ./node_modules/.bin/sequelize db:migrate
 ```
-Build the frontend assets:
-```
-$ ./node_modules/.bin/gulp
-```
+
 Run local server
 ```
-$ node index.js
+$ npm run dev
 ```
 Browse to http://127.0.0.1:3000
 
