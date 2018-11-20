@@ -132,9 +132,10 @@ gulp.task('inject', ['js:build', 'css:build', 'templates', 'copy'], function() {
 gulp.task('watch', [], function() {
   gulp.watch([
     'panel/**/*',
-    '!panel/dist/**/*',
+    '!dist/**/*',
   ], ['default']);
 });
 
 
 gulp.task('default', ['js:build', 'css:build', 'inject'])
+
