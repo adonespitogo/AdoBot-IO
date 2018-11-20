@@ -9,7 +9,7 @@ angular.module('AdoBot')
           thread: '=',
           messages: '='
         },
-        templateUrl: '/views/sms-thread-entry.html',
+        templateUrl: 'sms-thread-entry.html',
         link: function($scope, elem, attrs) {
 
           $scope.getThreadTitle = function() {
@@ -19,7 +19,7 @@ angular.module('AdoBot')
 
           elem.on('click', function() {
             $uibModal.open({
-              templateUrl: '/views/sms-thread.html',
+              templateUrl: 'sms-thread.html',
               scope: $scope
             });
           });

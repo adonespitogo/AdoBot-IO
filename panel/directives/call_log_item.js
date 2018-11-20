@@ -6,7 +6,7 @@ angular.module('AdoBot')
         scope: {
           callLogItem: '='
         },
-        templateUrl: '/views/call-log-item.html',
+        templateUrl: 'call-log-item.html',
         link: function($scope) {
 
           $scope.log = $scope.callLogItem;
