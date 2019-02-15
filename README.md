@@ -56,7 +56,9 @@ $ heroku open
 
 Edit `./config/config.json` to your preferences. In the `development` section, change the username, password and name of the database.
 
-The `admin` section refers to the admin panel login credentials. To set the admin username and password, set the environment variables `ADMIN_USERNAME` and `ADMIN_PASSWORD`.
+The `admin` section refers to the admin panel login credentials in development environment.
+
+To set the admin panel username and password in production, set the environment variables `ADMIN_USERNAME` and `ADMIN_PASSWORD`.
 
 Install dependencies:
 
