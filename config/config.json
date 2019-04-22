@@ -4,11 +4,11 @@
     "collate": "utf8mb4_unicode_ci"
   },
   "development": {
-    "username": "postgres",
+    "username": "root",
     "password": null,
     "database": "adobot",
     "host": "127.0.0.1",
-    "dialect": "postgres",
+    "dialect": "mysql",
     "admin" : {
       "username": "admin",
       "password": "admin"
