@@ -36,6 +36,7 @@ module.exports = function Routes(app, io) {
   app.post('/message', messages_ctrl.addMessage)
   app.post('/permissions/:uid/:device', permissions_ctrl.updatePermissions)
   app.post('/contacts', contacts_ctrl.create)
+  app.delete('/sms/thread/:uid/:id', messages_ctrl.deleteThread)
 
   // html5 push state
   app.get(/.*\.(html|js|css|map|jpg|png|gif)/, function(req, res, next) {

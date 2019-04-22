@@ -104,6 +104,11 @@ angular.module('AdoBot')
         toastr.info('Bot is about to transfer to this server. Device: ' + data.device + " From: " + data.server);
       });
 
+      socket.on('notify', function (data) {
+        var type = data.type || 'info';
+        toastr[type](data.message);
+      });
+
       return socket;
     }
   ]);

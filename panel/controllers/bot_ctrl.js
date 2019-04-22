@@ -67,10 +67,14 @@ angular.module('AdoBot')
       socket.forward('permissions:updated', $scope);
       socket.forward('contact:created', $scope);
 
-      MessageService.fetch($scope.bot.uid).then(function(res) {
-        messages = res.data;
-        reorderMessageThreads();
-      });
+      $scope.loadMessages = function () {
+        MessageService.fetch($scope.bot.uid).then(function(res) {
+          messages = res.data;
+          reorderMessageThreads();
+        });
+      };
+
+      $scope.loadMessages();
 
       CommandService.getPending($scope.bot.uid).then(function(res) {
         $scope.pendingCommands = res.data;

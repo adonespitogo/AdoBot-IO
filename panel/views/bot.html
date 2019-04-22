@@ -65,7 +65,7 @@
         <div ng-show="hasMessages">
           <p><strong>SMS Threads</strong></p>
           <div class="list-group">
-            <a ng-repeat="(thread, dateMessages) in messageThreads | orderObjectBy:'last_date':true" class="list-group-item" sms-thread thread="thread" messages="dateMessages.messages"></a>
+            <a ng-repeat="(thread, dateMessages) in messageThreads | orderObjectBy:'last_date':true" class="list-group-item" sms-thread thread="thread" on-close="loadMessages()" messages="dateMessages.messages"></a>
           </div>
         </div>
       </div>

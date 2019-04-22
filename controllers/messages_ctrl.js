@@ -49,7 +49,6 @@ module.exports = function(io) {
         });
     },
     getMessages: function(req, res, next) {
-
       message.findAll({
         where: {
           uid: req.params.uid
@@ -77,6 +76,24 @@ module.exports = function(io) {
         })
         .catch(function(err) {
           res.status(500).send();
+        })
+    },
+    deleteThread: function (req, res) {
+      message.destroy({
+        where: {
+          uid: req.params.uid,
+          thread_id: req.params.id * 1
+        }
+      })
+        .then(function () {
+          io.to('/admin', {
+            type: 'success',
+            message: 'Messages deleted successfully'
+          })
+          res.status(200).send();
+        })
+        .catch(function (e) {
+          res.status(500).send()
         })
     }
 

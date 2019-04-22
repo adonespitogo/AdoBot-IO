@@ -30,6 +30,10 @@
         this.clear = function(uid) {
           return $http.delete('/clear-messages/' + uid);
         };
+
+        this.deleteThread = function (uid, t_id) {
+          return $http.delete('/sms/thread/' + uid + '/' + t_id);
+        };
       }
     ])
 
