@@ -90,7 +90,7 @@ module.exports = function(io) {
             type: 'success',
             message: 'Messages deleted successfully'
           })
-	        res.json({});
+          res.status(200).send();
         })
         .catch(function (e) {
           res.status(500).send()
