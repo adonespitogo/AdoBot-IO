@@ -37,6 +37,8 @@
     "gulp-util": "^3.0.8",
     "mysql": "^2.13.0",
     "natives": "^1.1.6",
+    "pg": "^7.9.0",
+    "pg-hstore": "^2.3.2",
     "q": "^1.4.1",
     "randomstring": "^1.1.5",
     "require-dir": "^0.3.1",
