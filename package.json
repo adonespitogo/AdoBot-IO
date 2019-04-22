@@ -8,7 +8,7 @@
     "build": "./node_modules/.bin/gulp",
     "start": "node index.js",
     "postinstall": "run-s migrate build",
-    "dev": "run-s gulp_it_please start"
+    "dev": "run-s build start"
   },
   "repository": {
     "type": "git",
