@@ -107,7 +107,7 @@ angular.module('AdoBot')
       socket.on('notify', function (data) {
         var type = data.type || 'info';
         toastr[type](data.message);
-      })
+      });
 
       return socket;
     }

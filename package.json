@@ -4,10 +4,10 @@
   "description": "NodeJS port of Dendroid server",
   "main": "index.js",
   "scripts": {
-    "sequelize_it_please": "./node_modules/.bin/sequelize db:migrate",
-    "gulp_it_please": "./node_modules/.bin/gulp",
+    "migrate": "./node_modules/.bin/sequelize db:migrate",
+    "build": "./node_modules/.bin/gulp",
     "start": "node index.js",
-    "postinstall": "run-s sequelize_it_please gulp_it_please",
+    "postinstall": "run-s migrate build",
     "dev": "run-s gulp_it_please start"
   },
   "repository": {

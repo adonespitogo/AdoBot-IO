@@ -3,7 +3,8 @@ angular.module('AdoBot')
     '$uibModal',
     '$filter',
     'MessageService',
-    function($uibModal, $filter, MessageService) {
+    'toastr',
+    function($uibModal, $filter, MessageService, toastr) {
       return {
         restrict: 'AE',
         scope: {
@@ -14,6 +15,8 @@ angular.module('AdoBot')
         templateUrl: 'sms-thread-entry.html',
         link: function($scope, elem, attrs) {
 
+          var modal;
+
           $scope.getThreadTitle = function() {
             var msg = $scope.messages[0];
             return (msg.name ? msg.name + ' ' : '') + msg.phone;
@@ -23,20 +26,20 @@ angular.module('AdoBot')
             var msg = $scope.messages[0];
             return MessageService.deleteThread(msg.uid, msg.thread_id)
             .then(function () {
-              $scope.$close();
+              if (modal) {
+                $scope.onClose();
+                modal.close();
+              }
             })
             .catch(function (e) {
-              console.log(e);
+              toastr.error("Something went wrong: " + e.toString());
             });
           };
 
           elem.on('click', function() {
-            $uibModal.open({
+            modal = $uibModal.open({
               templateUrl: 'sms-thread.html',
               scope: $scope
-            })
-            .result.then(function () {
-              $scope.onClose()();
             });
           });
 
