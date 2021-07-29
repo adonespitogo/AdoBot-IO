@@ -2,3 +2,5 @@
 /panel/dist
 /dist
 tags
+*.swp
+*.swo
