@@ -8,20 +8,20 @@ angular.module('AdoBot').config([
         abstract: true,
         name: 'dashboard',
         url: '/',
-        templateUrl: 'dashboard.html',
+        templateUrl: '/dashboard.html',
         controller: 'RootCtrl'
       })
       .state('dashboard.home', {
         name: 'home',
         url: '',
         controller: 'HomeCtrl',
-        templateUrl: 'home.html'
+        templateUrl: '/home.html'
       })
       .state('dashboard.bot', {
         name: 'bot',
         url: 'bot/:id',
         controller: 'BotCtrl',
-        templateUrl: 'bot.html',
+        templateUrl: '/bot.html',
         resolve: {
           bot: [
             'BotService',

@@ -113,10 +113,7 @@ function templates() {
 function html() {
   var target = gulp.src(['./dist/index.html']);
   var sources = gulp.src(['./dist/**/*.js', './dist/**/*.css']);
-
-  return target.pipe(inject(sources, {
-    ignorePath: 'dist'
-  })).pipe(gulp.dest('./dist'))
+  return target.pipe(inject(sources)).pipe(gulp.dest('./dist'))
 }
 
 // ------------- BUILD ----------------------------

@@ -5,7 +5,7 @@ angular.module('Login', ['ui.router', 'templates'])
     var loginState = {
       name: 'login',
       url: '/',
-      templateUrl: 'login.html',
+      templateUrl: '/login.html',
       controller: 'LoginCtrl'
     };
 

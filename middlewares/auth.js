@@ -1,5 +1,5 @@
 var env = process.env.NODE_ENV || 'development'
-var config = require('../config/config')
+var config = require('../config/auth')
 var creds = config[env].admin
 var username = env === 'production' ? process.env[creds.username.use_env_variable] : creds.username
 var password = env === 'production' ? process.env[creds.password.use_env_variable] : creds.password
