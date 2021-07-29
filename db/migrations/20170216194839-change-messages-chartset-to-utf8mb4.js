@@ -1,6 +1,6 @@
 'use strict';
 
-var sequelize = require('../config/sequelize')
+var sequelize = require('../../config/sequelize')
 var q = require('q')
 
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
     promises[1] = sequelize.query('ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;')
     promises[2] = sequelize.query('ALTER TABLE messages MODIFY message TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;')
 
-    return q.all(promises)
+    return q.all(promises).catch(e => console.log(e))
   },
 
   down: function (queryInterface, Sequelize) {

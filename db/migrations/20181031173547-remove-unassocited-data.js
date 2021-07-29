@@ -1,6 +1,6 @@
 'use strict';
 
-var sequelize = require('../config/sequelize')
+var sequelize = require('../../config/sequelize')
 var q = require('q')
 
 var Bot = require('../models/bot')
