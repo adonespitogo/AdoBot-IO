@@ -22,11 +22,10 @@ var Model = sequelize.define('Message', {
 }, {
   tableName: 'messages',
   timestamps: false,
-  charset: 'utf8mb4',
   indexes: [
     {
       unique: true,
-      fiels: ['message_id']
+      fields: ['message_id']
     }
   ]
 })

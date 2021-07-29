@@ -8,7 +8,7 @@ module.exports = {
 
       Example:
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
-    */
+      */
     return queryInterface.createTable('call_logs', {
       id: {
         type: Sequelize.INTEGER,
@@ -22,6 +22,12 @@ module.exports = {
       date: Sequelize.STRING(50),
       phone: Sequelize.STRING(20),
       duration: Sequelize.INTEGER
+    }).then(function () {
+      return queryInterface.addConstraint('messages', {
+        type: 'unique',
+        fields: ['date'],
+        name: 'unique_call_log_date'
+      });
     });
   },
 
@@ -32,7 +38,7 @@ module.exports = {
 
       Example:
       return queryInterface.dropTable('users');
-    */
+      */
     return queryInterface.dropTable('call_logs');
   }
 };

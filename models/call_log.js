@@ -23,7 +23,7 @@ var Model = sequelize.define('CallLog', {
   indexes: [
     {
       unique: true,
-      fiels: ['date']
+      fields: ['date']
     }
   ]
 })

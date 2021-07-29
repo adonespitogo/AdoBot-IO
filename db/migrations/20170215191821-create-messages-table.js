@@ -17,6 +17,12 @@ module.exports = {
       phone: Sequelize.STRING(20),
       thread_id: Sequelize.INTEGER,
       message_id: Sequelize.INTEGER
+    }).then(function () {
+      return queryInterface.addConstraint('messages', {
+        type: 'unique',
+        fields: ['message_id'],
+        name: 'unique_msg_id'
+      })
     });
   },
 
