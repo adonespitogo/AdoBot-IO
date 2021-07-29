@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 
 var env = process.env.NODE_ENV || 'development';
-var config = require('./config');
+var config = require('../db/config');
 var sequelize;
 
 if (env === 'development') {

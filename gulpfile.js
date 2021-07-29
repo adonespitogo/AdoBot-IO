@@ -1,14 +1,12 @@
-'use strict'
-
-const gulp = require('gulp')
-const concat = require('gulp-concat')
-const uglify = require('gulp-uglify')
-const jshint = require('gulp-jshint')
-const gutil = require('gulp-util')
-const inject = require('gulp-inject')
-const del = require('del')
-const randomstring = require('randomstring')
-const templateCache = require('gulp-angular-templatecache');
+var gulp = require('gulp')
+var concat = require('gulp-concat')
+var uglify = require('gulp-uglify')
+var jshint = require('gulp-jshint')
+var gutil = require('gulp-util')
+var inject = require('gulp-inject')
+var del = require('del')
+var randomstring = require('randomstring')
+var templateCache = require('gulp-angular-templatecache');
 
 
 // javascripts -----------------------------
@@ -50,17 +48,11 @@ var copy_files = [
   './panel/index.html'
 ]
 
-gulp.task('clean', function (done) {
-  del(['./dist'])
-    .then(function () {
-      done();
-    })
-    .catch(function(err) {
-      done(err);
-    })
-})
+function clean () {
+  return del(['./dist'])
+}
 
-gulp.task('lint', function () {
+function lint() {
   var s = gulp.src(app_js)
   if (process.env.NODE_ENV != 'production') {
     s = s
@@ -68,9 +60,9 @@ gulp.task('lint', function () {
       .pipe(jshint.reporter('default'))
   }
   return s;
-})
+}
 
-gulp.task('js:build', ['lint', 'clean'], function() {
+function buildJS() {
   var filename = 'application-' + randomstring.generate() + '.js';
   var stream = gulp.src(js_libs.concat(app_js))
     .pipe(concat(filename))
@@ -82,7 +74,7 @@ gulp.task('js:build', ['lint', 'clean'], function() {
   }
 
   return stream.pipe(gulp.dest('./dist/js'))
-})
+}
 
 // ------------ CSS -----------------------------
 
@@ -96,19 +88,19 @@ var app_css = [
   './panel/css/**/*.css',
 ]
 
-gulp.task('css:build', ['clean'], function() {
+function buildCSS() {
   var filename = 'application-' + randomstring.generate() + '.css';
   return gulp.src(css_libs.concat(app_css))
     .pipe(concat(filename))
     .pipe(gulp.dest('./dist/css'))
-})
+}
 
-gulp.task('copy', ['clean'], function () {
+function copy () {
   return gulp.src(copy_files)
     .pipe(gulp.dest('./dist'))
-});
+}
 
-gulp.task('templates', ['clean'], function () {
+function templates() {
   return gulp.src('./panel/views/**/*.html')
     .pipe(templateCache({
       filename: 'templates-' + randomstring.generate() + '.js',
@@ -116,26 +108,32 @@ gulp.task('templates', ['clean'], function () {
       standalone: true
     }))
     .pipe(gulp.dest('./dist/js'));
-})
+}
 
-gulp.task('inject', ['js:build', 'css:build', 'templates', 'copy'], function() {
-  var target = gulp.src('./dist/index.html');
+function html() {
+  var target = gulp.src(['./dist/index.html']);
   var sources = gulp.src(['./dist/**/*.js', './dist/**/*.css']);
 
   return target.pipe(inject(sources, {
     ignorePath: 'dist'
   })).pipe(gulp.dest('./dist'))
-})
+}
 
 // ------------- BUILD ----------------------------
 
-gulp.task('watch', [], function() {
-  gulp.watch([
-    'panel/**/*',
-    '!dist/**/*',
-  ], ['default']);
-});
+//gulp.task('watch', [], function() {
+//  gulp.watch([
+//    'panel/**/*',
+//    '!dist/**/*',
+//  ], ['default']);
+//});
 
 
-gulp.task('default', ['js:build', 'css:build', 'inject'])
+//gulp.task('default', ['js:build', 'css:build', 'inject'])
 
+exports.default = gulp.series(
+  clean,
+  gulp.parallel(buildJS, buildCSS, templates),
+  copy,
+  html
+)

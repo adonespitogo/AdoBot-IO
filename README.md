@@ -67,7 +67,7 @@ $ npm install
 ```
 Populate the database:
 ```
-$ ./node_modules/.bin/sequelize db:migrate
+$ npm run migrate
 ```
 
 Run local server
