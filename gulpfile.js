@@ -14,7 +14,7 @@ var js_libs = [
   './panel/libs/js/jquery-3.1.1.min.js',
   './panel/libs/js/lodash.min.js',
   './panel/libs/js/moment.min.js',
-  './panel/libs/js/socket.io.min.js',
+  './panel/libs/js/socket.io.js',
   // angular libs
   './panel/libs/js/angular.min.js',
   './panel/libs/js/angular-animate.min.js',
